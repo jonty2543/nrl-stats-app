@@ -54,7 +54,7 @@ def get_player_stats():
         
         return player_stats
     # Extract player statistics from both datasets
-    player_stats_2023 = extract_player_stats(data_2023)
+    #player_stats_2023 = extract_player_stats(data_2023)
     player_stats_r1_6 = extract_player_stats(data_r1_6)
     player_stats_r7_27 = extract_player_stats(data_r7_27)
     player_stats_2025 = extract_player_stats(data_2025)
@@ -65,7 +65,7 @@ def get_player_stats():
         player_stats_2025_rds[rd] = extract_player_stats(data_25_rds[rd])'''
     
     # Combine both datasets
-    combined_player_stats = player_stats_2023 + player_stats_r1_6 + player_stats_r7_27 + player_stats_2025
+    combined_player_stats =  player_stats_r1_6 + player_stats_r7_27 + player_stats_2025
     '''for rd in rounds:
         combined_player_stats = combined_player_stats + player_stats_2025_rds[rd]'''
     
