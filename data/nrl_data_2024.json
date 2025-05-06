@@ -1,0 +1,1952 @@
+{
+    "NRL": [
+        {
+            "2024": [
+                {
+                    "1": [
+                        {
+                            "Details": "Sea Eagles vs Rabbitohs",
+                            "Date": "Sunday 3rd March",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "36",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "24",
+                            "Venue": "Allegiant Stadium, Las Vegas"
+                        },
+                        {
+                            "Details": "Roosters vs Broncos",
+                            "Date": "Sunday 3rd March",
+                            "Home": "Roosters",
+                            "Home_Score": "20",
+                            "Away": "Broncos",
+                            "Away_Score": "10",
+                            "Venue": "Allegiant Stadium, Las Vegas"
+                        },
+                        {
+                            "Details": "Knights vs Raiders",
+                            "Date": "Thursday 7th March",
+                            "Home": "Knights",
+                            "Home_Score": "12",
+                            "Away": "Raiders",
+                            "Away_Score": "28",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Warriors vs Sharks",
+                            "Date": "Friday 8th March",
+                            "Home": "Warriors",
+                            "Home_Score": "12",
+                            "Away": "Sharks",
+                            "Away_Score": "16",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Storm vs Panthers",
+                            "Date": "Friday 8th March",
+                            "Home": "Storm",
+                            "Home_Score": "8",
+                            "Away": "Panthers",
+                            "Away_Score": "0",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Eels vs Bulldogs",
+                            "Date": "Saturday 9th March",
+                            "Home": "Eels",
+                            "Home_Score": "26",
+                            "Away": "Bulldogs",
+                            "Away_Score": "8",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Titans vs Dragons",
+                            "Date": "Saturday 9th March",
+                            "Home": "Titans",
+                            "Home_Score": "4",
+                            "Away": "Dragons",
+                            "Away_Score": "28",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Dolphins vs Cowboys",
+                            "Date": "Sunday 10th March",
+                            "Home": "Dolphins",
+                            "Home_Score": "18",
+                            "Away": "Cowboys",
+                            "Away_Score": "43",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        }
+                    ]
+                },
+                {
+                    "2": [
+                        {
+                            "Details": "Broncos vs Rabbitohs",
+                            "Date": "Thursday 14th March",
+                            "Home": "Broncos",
+                            "Home_Score": "28",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "18",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Sharks vs Bulldogs",
+                            "Date": "Friday 15th March",
+                            "Home": "Sharks",
+                            "Home_Score": "25",
+                            "Away": "Bulldogs",
+                            "Away_Score": "6",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Panthers vs Eels",
+                            "Date": "Friday 15th March",
+                            "Home": "Panthers",
+                            "Home_Score": "26",
+                            "Away": "Eels",
+                            "Away_Score": "18",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Raiders vs Wests Tigers",
+                            "Date": "Saturday 16th March",
+                            "Home": "Raiders",
+                            "Home_Score": "32",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "12",
+                            "Venue": "GIO Stadium, Canberra"
+                        },
+                        {
+                            "Details": "Cowboys vs Knights",
+                            "Date": "Saturday 16th March",
+                            "Home": "Cowboys",
+                            "Home_Score": "21",
+                            "Away": "Knights",
+                            "Away_Score": "20",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Storm vs Warriors",
+                            "Date": "Saturday 16th March",
+                            "Home": "Storm",
+                            "Home_Score": "30",
+                            "Away": "Warriors",
+                            "Away_Score": "26",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Roosters",
+                            "Date": "Sunday 17th March",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "21",
+                            "Away": "Roosters",
+                            "Away_Score": "14",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Dolphins vs Dragons",
+                            "Date": "Sunday 17th March",
+                            "Home": "Dolphins",
+                            "Home_Score": "38",
+                            "Away": "Dragons",
+                            "Away_Score": "0",
+                            "Venue": "Kayo Stadium, Redcliffe"
+                        }
+                    ]
+                },
+                {
+                    "3": [
+                        {
+                            "Details": "Panthers vs Broncos",
+                            "Date": "Thursday 21st March",
+                            "Home": "Panthers",
+                            "Home_Score": "34",
+                            "Away": "Broncos",
+                            "Away_Score": "12",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Warriors vs Raiders",
+                            "Date": "Friday 22nd March",
+                            "Home": "Warriors",
+                            "Home_Score": "18",
+                            "Away": "Raiders",
+                            "Away_Score": "10",
+                            "Venue": "Apollo Projects Stadium, Christchurch"
+                        },
+                        {
+                            "Details": "Roosters vs Rabbitohs",
+                            "Date": "Friday 22nd March",
+                            "Home": "Roosters",
+                            "Home_Score": "48",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "6",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Bulldogs vs Titans",
+                            "Date": "Saturday 23rd March",
+                            "Home": "Bulldogs",
+                            "Home_Score": "32",
+                            "Away": "Titans",
+                            "Away_Score": "0",
+                            "Venue": "Belmore Sports Ground, Sydney"
+                        },
+                        {
+                            "Details": "Dragons vs Cowboys",
+                            "Date": "Saturday 23rd March",
+                            "Home": "Dragons",
+                            "Home_Score": "24",
+                            "Away": "Cowboys",
+                            "Away_Score": "46",
+                            "Venue": "Netstrata Jubilee Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Sharks",
+                            "Date": "Saturday 23rd March",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "32",
+                            "Away": "Sharks",
+                            "Away_Score": "6",
+                            "Venue": "Leichhardt Oval, Sydney"
+                        },
+                        {
+                            "Details": "Eels vs Sea Eagles",
+                            "Date": "Sunday 24th March",
+                            "Home": "Eels",
+                            "Home_Score": "28",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "24",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Knights vs Storm",
+                            "Date": "Sunday 24th March",
+                            "Home": "Knights",
+                            "Home_Score": "14",
+                            "Away": "Storm",
+                            "Away_Score": "12",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        }
+                    ]
+                },
+                {
+                    "4": [
+                        {
+                            "Details": "Roosters vs Panthers",
+                            "Date": "Thursday 28th March",
+                            "Home": "Roosters",
+                            "Home_Score": "16",
+                            "Away": "Panthers",
+                            "Away_Score": "22",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Bulldogs",
+                            "Date": "Friday 29th March",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "20",
+                            "Away": "Bulldogs",
+                            "Away_Score": "16",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Broncos vs Cowboys",
+                            "Date": "Friday 29th March",
+                            "Home": "Broncos",
+                            "Home_Score": "38",
+                            "Away": "Cowboys",
+                            "Away_Score": "12",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Dragons vs Sea Eagles",
+                            "Date": "Saturday 30th March",
+                            "Home": "Dragons",
+                            "Home_Score": "20",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "12",
+                            "Venue": "WIN Stadium, Wollongong"
+                        },
+                        {
+                            "Details": "Titans vs Dolphins",
+                            "Date": "Saturday 30th March",
+                            "Home": "Titans",
+                            "Home_Score": "14",
+                            "Away": "Dolphins",
+                            "Away_Score": "30",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Warriors vs Knights",
+                            "Date": "Sunday 31st March",
+                            "Home": "Warriors",
+                            "Home_Score": "20",
+                            "Away": "Knights",
+                            "Away_Score": "12",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Sharks vs Raiders",
+                            "Date": "Sunday 31st March",
+                            "Home": "Sharks",
+                            "Home_Score": "36",
+                            "Away": "Raiders",
+                            "Away_Score": "22",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Eels vs Wests Tigers",
+                            "Date": "Monday 1st April",
+                            "Home": "Eels",
+                            "Home_Score": "16",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "17",
+                            "Venue": "CommBank Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "5": [
+                        {
+                            "Details": "Storm vs Broncos",
+                            "Date": "Thursday 4th April",
+                            "Home": "Storm",
+                            "Home_Score": "34",
+                            "Away": "Broncos",
+                            "Away_Score": "32",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Bulldogs vs Roosters",
+                            "Date": "Friday 5th April",
+                            "Home": "Bulldogs",
+                            "Home_Score": "30",
+                            "Away": "Roosters",
+                            "Away_Score": "26",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Knights vs Dragons",
+                            "Date": "Friday 5th April",
+                            "Home": "Knights",
+                            "Home_Score": "30",
+                            "Away": "Dragons",
+                            "Away_Score": "10",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Warriors",
+                            "Date": "Saturday 6th April",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "4",
+                            "Away": "Warriors",
+                            "Away_Score": "34",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Panthers",
+                            "Date": "Saturday 6th April",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "32",
+                            "Away": "Panthers",
+                            "Away_Score": "18",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Dolphins vs Wests Tigers",
+                            "Date": "Saturday 6th April",
+                            "Home": "Dolphins",
+                            "Home_Score": "26",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "16",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Cowboys vs Titans",
+                            "Date": "Sunday 7th April",
+                            "Home": "Cowboys",
+                            "Home_Score": "35",
+                            "Away": "Titans",
+                            "Away_Score": "22",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Raiders vs Eels",
+                            "Date": "Sunday 7th April",
+                            "Home": "Raiders",
+                            "Home_Score": "41",
+                            "Away": "Eels",
+                            "Away_Score": "8",
+                            "Venue": "GIO Stadium, Canberra"
+                        }
+                    ]
+                },
+                {
+                    "6": [
+                        {
+                            "Details": "Knights vs Roosters",
+                            "Date": "Thursday 11th April",
+                            "Home": "Knights",
+                            "Home_Score": "20",
+                            "Away": "Roosters",
+                            "Away_Score": "22",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Storm vs Bulldogs",
+                            "Date": "Friday 12th April",
+                            "Home": "Storm",
+                            "Home_Score": "16",
+                            "Away": "Bulldogs",
+                            "Away_Score": "14",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Broncos vs Dolphins",
+                            "Date": "Friday 12th April",
+                            "Home": "Broncos",
+                            "Home_Score": "28",
+                            "Away": "Dolphins",
+                            "Away_Score": "14",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Warriors vs Sea Eagles",
+                            "Date": "Saturday 13th April",
+                            "Home": "Warriors",
+                            "Home_Score": "22",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "22",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Eels vs Cowboys",
+                            "Date": "Saturday 13th April",
+                            "Home": "Eels",
+                            "Home_Score": "27",
+                            "Away": "Cowboys",
+                            "Away_Score": "20",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Sharks",
+                            "Date": "Saturday 13th April",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "22",
+                            "Away": "Sharks",
+                            "Away_Score": "34",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Dragons",
+                            "Date": "Sunday 14th April",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "12",
+                            "Away": "Dragons",
+                            "Away_Score": "24",
+                            "Venue": "Campbelltown Sports Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Raiders vs Titans",
+                            "Date": "Sunday 14th April",
+                            "Home": "Raiders",
+                            "Home_Score": "21",
+                            "Away": "Titans",
+                            "Away_Score": "20",
+                            "Venue": "GIO Stadium, Canberra"
+                        }
+                    ]
+                },
+                {
+                    "7": [
+                        {
+                            "Details": "Roosters vs Storm",
+                            "Date": "Thursday 18th April",
+                            "Home": "Roosters",
+                            "Home_Score": "12",
+                            "Away": "Storm",
+                            "Away_Score": "18",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Dragons vs Warriors",
+                            "Date": "Friday 19th April",
+                            "Home": "Dragons",
+                            "Home_Score": "30",
+                            "Away": "Warriors",
+                            "Away_Score": "12",
+                            "Venue": "WIN Stadium, Wollongong"
+                        },
+                        {
+                            "Details": "Eels vs Dolphins",
+                            "Date": "Friday 19th April",
+                            "Home": "Eels",
+                            "Home_Score": "16",
+                            "Away": "Dolphins",
+                            "Away_Score": "44",
+                            "Venue": "TIO Stadium, Darwin"
+                        },
+                        {
+                            "Details": "Panthers vs Wests Tigers",
+                            "Date": "Saturday 20th April",
+                            "Home": "Panthers",
+                            "Home_Score": "22",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "6",
+                            "Venue": "Carrington Park, Bathurst"
+                        },
+                        {
+                            "Details": "Titans vs Sea Eagles",
+                            "Date": "Saturday 20th April",
+                            "Home": "Titans",
+                            "Home_Score": "30",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "34",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Broncos vs Raiders",
+                            "Date": "Saturday 20th April",
+                            "Home": "Broncos",
+                            "Home_Score": "34",
+                            "Away": "Raiders",
+                            "Away_Score": "10",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Bulldogs vs Knights",
+                            "Date": "Sunday 21st April",
+                            "Home": "Bulldogs",
+                            "Home_Score": "36",
+                            "Away": "Knights",
+                            "Away_Score": "12",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Sharks vs Cowboys",
+                            "Date": "Sunday 21st April",
+                            "Home": "Sharks",
+                            "Home_Score": "42",
+                            "Away": "Cowboys",
+                            "Away_Score": "6",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "8": [
+                        {
+                            "Details": "Warriors vs Titans",
+                            "Date": "Thursday 25th April",
+                            "Home": "Warriors",
+                            "Home_Score": "24",
+                            "Away": "Titans",
+                            "Away_Score": "27",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Dragons vs Roosters",
+                            "Date": "Thursday 25th April",
+                            "Home": "Dragons",
+                            "Home_Score": "18",
+                            "Away": "Roosters",
+                            "Away_Score": "60",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Storm vs Rabbitohs",
+                            "Date": "Thursday 25th April",
+                            "Home": "Storm",
+                            "Home_Score": "54",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "20",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Eels",
+                            "Date": "Friday 26th April",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "32",
+                            "Away": "Eels",
+                            "Away_Score": "18",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Broncos",
+                            "Date": "Saturday 27th April",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "10",
+                            "Away": "Broncos",
+                            "Away_Score": "34",
+                            "Venue": "Campbelltown Sports Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Cowboys vs Panthers",
+                            "Date": "Saturday 27th April",
+                            "Home": "Cowboys",
+                            "Home_Score": "20",
+                            "Away": "Panthers",
+                            "Away_Score": "26",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Dolphins vs Knights",
+                            "Date": "Sunday 28th April",
+                            "Home": "Dolphins",
+                            "Home_Score": "14",
+                            "Away": "Knights",
+                            "Away_Score": "18",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Raiders vs Sharks",
+                            "Date": "Sunday 28th April",
+                            "Home": "Raiders",
+                            "Home_Score": "0",
+                            "Away": "Sharks",
+                            "Away_Score": "40",
+                            "Venue": "GIO Stadium, Canberra"
+                        }
+                    ]
+                },
+                {
+                    "9": [
+                        {
+                            "Details": "Rabbitohs vs Panthers",
+                            "Date": "Thursday 2nd May",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "12",
+                            "Away": "Panthers",
+                            "Away_Score": "42",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Raiders",
+                            "Date": "Friday 3rd May",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "24",
+                            "Away": "Raiders",
+                            "Away_Score": "26",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Broncos vs Roosters",
+                            "Date": "Friday 3rd May",
+                            "Home": "Broncos",
+                            "Home_Score": "18",
+                            "Away": "Roosters",
+                            "Away_Score": "40",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Bulldogs vs Wests Tigers",
+                            "Date": "Saturday 4th May",
+                            "Home": "Bulldogs",
+                            "Home_Score": "22",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "14",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Titans vs Storm",
+                            "Date": "Saturday 4th May",
+                            "Home": "Titans",
+                            "Home_Score": "20",
+                            "Away": "Storm",
+                            "Away_Score": "22",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Cowboys vs Dolphins",
+                            "Date": "Saturday 4th May",
+                            "Home": "Cowboys",
+                            "Home_Score": "26",
+                            "Away": "Dolphins",
+                            "Away_Score": "28",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Knights vs Warriors",
+                            "Date": "Sunday 5th May",
+                            "Home": "Knights",
+                            "Home_Score": "14",
+                            "Away": "Warriors",
+                            "Away_Score": "8",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Sharks vs Dragons",
+                            "Date": "Sunday 5th May",
+                            "Home": "Sharks",
+                            "Home_Score": "20",
+                            "Away": "Dragons",
+                            "Away_Score": "10",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "10": [
+                        {
+                            "Details": "Dolphins vs Sea Eagles",
+                            "Date": "Thursday 9th May",
+                            "Home": "Dolphins",
+                            "Home_Score": "30",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "24",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Panthers vs Bulldogs",
+                            "Date": "Friday 10th May",
+                            "Home": "Panthers",
+                            "Home_Score": "16",
+                            "Away": "Bulldogs",
+                            "Away_Score": "10",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Eels vs Broncos",
+                            "Date": "Friday 10th May",
+                            "Home": "Eels",
+                            "Home_Score": "14",
+                            "Away": "Broncos",
+                            "Away_Score": "30",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Knights",
+                            "Date": "Saturday 11th May",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "14",
+                            "Away": "Knights",
+                            "Away_Score": "20",
+                            "Venue": "Scully Park, Tamworth"
+                        },
+                        {
+                            "Details": "Dragons vs Rabbitohs",
+                            "Date": "Saturday 11th May",
+                            "Home": "Dragons",
+                            "Home_Score": "28",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "14",
+                            "Venue": "Netstrata Jubilee Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Storm vs Sharks",
+                            "Date": "Saturday 11th May",
+                            "Home": "Storm",
+                            "Home_Score": "18",
+                            "Away": "Sharks",
+                            "Away_Score": "25",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Roosters vs Warriors",
+                            "Date": "Sunday 12th May",
+                            "Home": "Roosters",
+                            "Home_Score": "38",
+                            "Away": "Warriors",
+                            "Away_Score": "18",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Titans vs Cowboys",
+                            "Date": "Sunday 12th May",
+                            "Home": "Titans",
+                            "Home_Score": "20",
+                            "Away": "Cowboys",
+                            "Away_Score": "18",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        }
+                    ]
+                },
+                {
+                    "11": [
+                        {
+                            "Details": "Raiders vs Bulldogs",
+                            "Date": "Friday 17th May",
+                            "Home": "Raiders",
+                            "Home_Score": "24",
+                            "Away": "Bulldogs",
+                            "Away_Score": "20",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Broncos",
+                            "Date": "Friday 17th May",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "12",
+                            "Away": "Broncos",
+                            "Away_Score": "13",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Titans vs Knights",
+                            "Date": "Saturday 18th May",
+                            "Home": "Titans",
+                            "Home_Score": "24",
+                            "Away": "Knights",
+                            "Away_Score": "28",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Sharks vs Roosters",
+                            "Date": "Saturday 18th May",
+                            "Home": "Sharks",
+                            "Home_Score": "38",
+                            "Away": "Roosters",
+                            "Away_Score": "30",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Cowboys",
+                            "Date": "Saturday 18th May",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "22",
+                            "Away": "Cowboys",
+                            "Away_Score": "28",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Warriors vs Panthers",
+                            "Date": "Sunday 19th May",
+                            "Home": "Warriors",
+                            "Home_Score": "22",
+                            "Away": "Panthers",
+                            "Away_Score": "20",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Storm vs Eels",
+                            "Date": "Sunday 19th May",
+                            "Home": "Storm",
+                            "Home_Score": "48",
+                            "Away": "Eels",
+                            "Away_Score": "16",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Dolphins",
+                            "Date": "Sunday 19th May",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "12",
+                            "Away": "Dolphins",
+                            "Away_Score": "24",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        }
+                    ]
+                },
+                {
+                    "12": [
+                        {
+                            "Details": "Bulldogs vs Dragons",
+                            "Date": "Thursday 23rd May",
+                            "Home": "Bulldogs",
+                            "Home_Score": "44",
+                            "Away": "Dragons",
+                            "Away_Score": "12",
+                            "Venue": "Accor Stadium, Sydney\n            \n              Home of the Burramattagal and Wann-gal Peoples"
+                        },
+                        {
+                            "Details": "Cowboys vs Wests Tigers",
+                            "Date": "Friday 24th May",
+                            "Home": "Cowboys",
+                            "Home_Score": "42",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "28",
+                            "Venue": "Queensland Country Bank Stadium, Townsville\n            \n              Home of the Wulgurukaba Peoples"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Storm",
+                            "Date": "Friday 24th May",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "26",
+                            "Away": "Storm",
+                            "Away_Score": "20",
+                            "Venue": "4 Pines Park, Sydney\n            \n              Home of the Garigal People"
+                        },
+                        {
+                            "Details": "Raiders vs Roosters",
+                            "Date": "Saturday 25th May",
+                            "Home": "Raiders",
+                            "Home_Score": "16",
+                            "Away": "Roosters",
+                            "Away_Score": "44",
+                            "Venue": "GIO Stadium, Canberra\n            \n              Home of the Ngunnawal People"
+                        },
+                        {
+                            "Details": "Sharks vs Panthers",
+                            "Date": "Saturday 25th May",
+                            "Home": "Sharks",
+                            "Home_Score": "0",
+                            "Away": "Panthers",
+                            "Away_Score": "42",
+                            "Venue": "PointsBet Stadium, Sydney\n            \n              Home of the Dharawal People"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Eels",
+                            "Date": "Saturday 25th May",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "42",
+                            "Away": "Eels",
+                            "Away_Score": "26",
+                            "Venue": "Accor Stadium, Sydney\n            \n              Home of the Burramattagal and Wann-gal Peoples"
+                        },
+                        {
+                            "Details": "Broncos vs Titans",
+                            "Date": "Sunday 26th May",
+                            "Home": "Broncos",
+                            "Home_Score": "34",
+                            "Away": "Titans",
+                            "Away_Score": "36",
+                            "Venue": "Suncorp Stadium, Brisbane\n            \n              Home of the Yuggera & Turrbal Peoples"
+                        },
+                        {
+                            "Details": "Warriors vs Dolphins",
+                            "Date": "Sunday 26th May",
+                            "Home": "Warriors",
+                            "Home_Score": "24",
+                            "Away": "Dolphins",
+                            "Away_Score": "20",
+                            "Venue": "Go Media Stadium, Auckland\n            \n              Te p\u0101 o Rarotonga"
+                        }
+                    ]
+                },
+                {
+                    "13": [
+                        {
+                            "Details": "Eels vs Sharks",
+                            "Date": "Thursday 30th May",
+                            "Home": "Eels",
+                            "Home_Score": "34",
+                            "Away": "Sharks",
+                            "Away_Score": "22",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Knights vs Bulldogs",
+                            "Date": "Friday 31st May",
+                            "Home": "Knights",
+                            "Home_Score": "2",
+                            "Away": "Bulldogs",
+                            "Away_Score": "32",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Panthers vs Dragons",
+                            "Date": "Saturday 1st June",
+                            "Home": "Panthers",
+                            "Home_Score": "10",
+                            "Away": "Dragons",
+                            "Away_Score": "22",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Dolphins vs Raiders",
+                            "Date": "Saturday 1st June",
+                            "Home": "Dolphins",
+                            "Home_Score": "25",
+                            "Away": "Raiders",
+                            "Away_Score": "26",
+                            "Venue": "Kayo Stadium, Redcliffe"
+                        },
+                        {
+                            "Details": "Roosters vs Cowboys",
+                            "Date": "Sunday 2nd June",
+                            "Home": "Roosters",
+                            "Home_Score": "16",
+                            "Away": "Cowboys",
+                            "Away_Score": "18",
+                            "Venue": "Allianz Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "14": [
+                        {
+                            "Details": "Dragons vs Wests Tigers",
+                            "Date": "Friday 7th June",
+                            "Home": "Dragons",
+                            "Home_Score": "56",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "14",
+                            "Venue": "WIN Stadium, Wollongong"
+                        },
+                        {
+                            "Details": "Titans vs Rabbitohs",
+                            "Date": "Saturday 8th June",
+                            "Home": "Titans",
+                            "Home_Score": "12",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "46",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Cowboys vs Warriors",
+                            "Date": "Saturday 8th June",
+                            "Home": "Cowboys",
+                            "Home_Score": "12",
+                            "Away": "Warriors",
+                            "Away_Score": "42",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Broncos vs Sharks",
+                            "Date": "Saturday 8th June",
+                            "Home": "Broncos",
+                            "Home_Score": "12",
+                            "Away": "Sharks",
+                            "Away_Score": "22",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Storm vs Knights",
+                            "Date": "Sunday 9th June",
+                            "Home": "Storm",
+                            "Home_Score": "36",
+                            "Away": "Knights",
+                            "Away_Score": "28",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Panthers vs Sea Eagles",
+                            "Date": "Sunday 9th June",
+                            "Home": "Panthers",
+                            "Home_Score": "32",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "22",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Bulldogs vs Eels",
+                            "Date": "Monday 10th June",
+                            "Home": "Bulldogs",
+                            "Home_Score": "22",
+                            "Away": "Eels",
+                            "Away_Score": "18",
+                            "Venue": "Accor Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "15": [
+                        {
+                            "Details": "Sharks vs Dolphins",
+                            "Date": "Thursday 13th June",
+                            "Home": "Sharks",
+                            "Home_Score": "28",
+                            "Away": "Dolphins",
+                            "Away_Score": "30",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Raiders vs Cowboys",
+                            "Date": "Friday 14th June",
+                            "Home": "Raiders",
+                            "Home_Score": "16",
+                            "Away": "Cowboys",
+                            "Away_Score": "34",
+                            "Venue": "GIO Stadium, Canberra"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Broncos",
+                            "Date": "Friday 14th June",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "22",
+                            "Away": "Broncos",
+                            "Away_Score": "12",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Titans",
+                            "Date": "Saturday 15th June",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "18",
+                            "Away": "Titans",
+                            "Away_Score": "10",
+                            "Venue": "Leichhardt Oval, Sydney"
+                        },
+                        {
+                            "Details": "Warriors vs Storm",
+                            "Date": "Saturday 15th June",
+                            "Home": "Warriors",
+                            "Home_Score": "24",
+                            "Away": "Storm",
+                            "Away_Score": "38",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Eels vs Roosters",
+                            "Date": "Saturday 15th June",
+                            "Home": "Eels",
+                            "Home_Score": "18",
+                            "Away": "Roosters",
+                            "Away_Score": "28",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Dragons",
+                            "Date": "Sunday 16th June",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "30",
+                            "Away": "Dragons",
+                            "Away_Score": "14",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Knights vs Panthers",
+                            "Date": "Sunday 16th June",
+                            "Home": "Knights",
+                            "Home_Score": "18",
+                            "Away": "Panthers",
+                            "Away_Score": "26",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        }
+                    ]
+                },
+                {
+                    "16": [
+                        {
+                            "Details": "Dolphins vs Storm",
+                            "Date": "Friday 21st June",
+                            "Home": "Dolphins",
+                            "Home_Score": "24",
+                            "Away": "Storm",
+                            "Away_Score": "30",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Titans vs Warriors",
+                            "Date": "Saturday 22nd June",
+                            "Home": "Titans",
+                            "Home_Score": "66",
+                            "Away": "Warriors",
+                            "Away_Score": "6",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Roosters vs Bulldogs",
+                            "Date": "Saturday 22nd June",
+                            "Home": "Roosters",
+                            "Home_Score": "26",
+                            "Away": "Bulldogs",
+                            "Away_Score": "8",
+                            "Venue": "Industree Group Stadium, Gosford"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Sea Eagles",
+                            "Date": "Saturday 22nd June",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "14",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "0",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Raiders",
+                            "Date": "Sunday 23rd June",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "48",
+                            "Away": "Raiders",
+                            "Away_Score": "24",
+                            "Venue": "Campbelltown Sports Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "17": [
+                        {
+                            "Details": "Bulldogs vs Sharks",
+                            "Date": "Friday 28th June",
+                            "Home": "Bulldogs",
+                            "Home_Score": "15",
+                            "Away": "Sharks",
+                            "Away_Score": "14",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Warriors vs Broncos",
+                            "Date": "Saturday 29th June",
+                            "Home": "Warriors",
+                            "Home_Score": "32",
+                            "Away": "Broncos",
+                            "Away_Score": "16",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Knights vs Eels",
+                            "Date": "Saturday 29th June",
+                            "Home": "Knights",
+                            "Home_Score": "34",
+                            "Away": "Eels",
+                            "Away_Score": "26",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Storm vs Raiders",
+                            "Date": "Saturday 29th June",
+                            "Home": "Storm",
+                            "Home_Score": "16",
+                            "Away": "Raiders",
+                            "Away_Score": "6",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Dragons vs Dolphins",
+                            "Date": "Sunday 30th June",
+                            "Home": "Dragons",
+                            "Home_Score": "26",
+                            "Away": "Dolphins",
+                            "Away_Score": "6",
+                            "Venue": "Netstrata Jubilee Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Panthers vs Cowboys",
+                            "Date": "Sunday 30th June",
+                            "Home": "Panthers",
+                            "Home_Score": "6",
+                            "Away": "Cowboys",
+                            "Away_Score": "16",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Roosters vs Wests Tigers",
+                            "Date": "Sunday 30th June",
+                            "Home": "Roosters",
+                            "Home_Score": "40",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "6",
+                            "Venue": "Allianz Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "18": [
+                        {
+                            "Details": "Eels vs Rabbitohs",
+                            "Date": "Thursday 4th July",
+                            "Home": "Eels",
+                            "Home_Score": "16",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "32",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Sharks vs Titans",
+                            "Date": "Friday 5th July",
+                            "Home": "Sharks",
+                            "Home_Score": "16",
+                            "Away": "Titans",
+                            "Away_Score": "20",
+                            "Venue": "C.ex Coffs International Stadium, Coffs Harbour"
+                        },
+                        {
+                            "Details": "Broncos vs Panthers",
+                            "Date": "Friday 5th July",
+                            "Home": "Broncos",
+                            "Home_Score": "6",
+                            "Away": "Panthers",
+                            "Away_Score": "14",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Bulldogs vs Warriors",
+                            "Date": "Saturday 6th July",
+                            "Home": "Bulldogs",
+                            "Home_Score": "13",
+                            "Away": "Warriors",
+                            "Away_Score": "12",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Storm",
+                            "Date": "Saturday 6th July",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "28",
+                            "Away": "Storm",
+                            "Away_Score": "40",
+                            "Venue": "Leichhardt Oval, Sydney"
+                        },
+                        {
+                            "Details": "Cowboys vs Sea Eagles",
+                            "Date": "Saturday 6th July",
+                            "Home": "Cowboys",
+                            "Home_Score": "20",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "21",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Roosters vs Dragons",
+                            "Date": "Sunday 7th July",
+                            "Home": "Roosters",
+                            "Home_Score": "42",
+                            "Away": "Dragons",
+                            "Away_Score": "12",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Raiders vs Knights",
+                            "Date": "Sunday 7th July",
+                            "Home": "Raiders",
+                            "Home_Score": "12",
+                            "Away": "Knights",
+                            "Away_Score": "16",
+                            "Venue": "GIO Stadium, Canberra"
+                        }
+                    ]
+                },
+                {
+                    "19": [
+                        {
+                            "Details": "Dolphins vs Rabbitohs",
+                            "Date": "Thursday 11th July",
+                            "Home": "Dolphins",
+                            "Home_Score": "36",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "28",
+                            "Venue": "Kayo Stadium, Redcliffe"
+                        },
+                        {
+                            "Details": "Sharks vs Wests Tigers",
+                            "Date": "Friday 12th July",
+                            "Home": "Sharks",
+                            "Home_Score": "58",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "6",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Titans vs Eels",
+                            "Date": "Saturday 13th July",
+                            "Home": "Titans",
+                            "Home_Score": "24",
+                            "Away": "Eels",
+                            "Away_Score": "16",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Broncos vs Dragons",
+                            "Date": "Saturday 13th July",
+                            "Home": "Broncos",
+                            "Home_Score": "26",
+                            "Away": "Dragons",
+                            "Away_Score": "30",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Knights",
+                            "Date": "Sunday 14th July",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "44",
+                            "Away": "Knights",
+                            "Away_Score": "6",
+                            "Venue": "4 Pines Park, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "20": [
+                        {
+                            "Details": "Raiders vs Warriors",
+                            "Date": "Friday 19th July",
+                            "Home": "Raiders",
+                            "Home_Score": "20",
+                            "Away": "Warriors",
+                            "Away_Score": "18",
+                            "Venue": "GIO Stadium, Canberra"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Wests Tigers",
+                            "Date": "Saturday 20th July",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "42",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "28",
+                            "Venue": "Industree Group Stadium, Gosford"
+                        },
+                        {
+                            "Details": "Knights vs Broncos",
+                            "Date": "Saturday 20th July",
+                            "Home": "Knights",
+                            "Home_Score": "14",
+                            "Away": "Broncos",
+                            "Away_Score": "30",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Storm vs Roosters",
+                            "Date": "Saturday 20th July",
+                            "Home": "Storm",
+                            "Home_Score": "24",
+                            "Away": "Roosters",
+                            "Away_Score": "8",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Panthers vs Dolphins",
+                            "Date": "Sunday 21st July",
+                            "Home": "Panthers",
+                            "Home_Score": "28",
+                            "Away": "Dolphins",
+                            "Away_Score": "26",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Titans",
+                            "Date": "Sunday 21st July",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "38",
+                            "Away": "Titans",
+                            "Away_Score": "8",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Cowboys vs Bulldogs",
+                            "Date": "Sunday 21st July",
+                            "Home": "Cowboys",
+                            "Home_Score": "20",
+                            "Away": "Bulldogs",
+                            "Away_Score": "18",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        }
+                    ]
+                },
+                {
+                    "21": [
+                        {
+                            "Details": "Warriors vs Wests Tigers",
+                            "Date": "Friday 26th July",
+                            "Home": "Warriors",
+                            "Home_Score": "28",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "16",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Eels vs Storm",
+                            "Date": "Friday 26th July",
+                            "Home": "Eels",
+                            "Home_Score": "14",
+                            "Away": "Storm",
+                            "Away_Score": "32",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Broncos vs Bulldogs",
+                            "Date": "Saturday 27th July",
+                            "Home": "Broncos",
+                            "Home_Score": "16",
+                            "Away": "Bulldogs",
+                            "Away_Score": "41",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Cowboys vs Sharks",
+                            "Date": "Saturday 27th July",
+                            "Home": "Cowboys",
+                            "Home_Score": "30",
+                            "Away": "Sharks",
+                            "Away_Score": "22",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Roosters vs Sea Eagles",
+                            "Date": "Saturday 27th July",
+                            "Home": "Roosters",
+                            "Home_Score": "34",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "30",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Dragons vs Panthers",
+                            "Date": "Sunday 28th July",
+                            "Home": "Dragons",
+                            "Home_Score": "10",
+                            "Away": "Panthers",
+                            "Away_Score": "46",
+                            "Venue": "WIN Stadium, Wollongong"
+                        },
+                        {
+                            "Details": "Dolphins vs Titans",
+                            "Date": "Sunday 28th July",
+                            "Home": "Dolphins",
+                            "Home_Score": "14",
+                            "Away": "Titans",
+                            "Away_Score": "21",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Raiders vs Rabbitohs",
+                            "Date": "Sunday 28th July",
+                            "Home": "Raiders",
+                            "Home_Score": "32",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "12",
+                            "Venue": "GIO Stadium, Canberra"
+                        }
+                    ]
+                },
+                {
+                    "22": [
+                        {
+                            "Details": "Wests Tigers vs Cowboys",
+                            "Date": "Thursday 1st August",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "30",
+                            "Away": "Cowboys",
+                            "Away_Score": "48",
+                            "Venue": "Leichhardt Oval, Sydney"
+                        },
+                        {
+                            "Details": "Warriors vs Eels",
+                            "Date": "Friday 2nd August",
+                            "Home": "Warriors",
+                            "Home_Score": "20",
+                            "Away": "Eels",
+                            "Away_Score": "30",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Dolphins vs Roosters",
+                            "Date": "Friday 2nd August",
+                            "Home": "Dolphins",
+                            "Home_Score": "34",
+                            "Away": "Roosters",
+                            "Away_Score": "40",
+                            "Venue": "HBF Park, Perth"
+                        },
+                        {
+                            "Details": "Titans vs Broncos",
+                            "Date": "Saturday 3rd August",
+                            "Home": "Titans",
+                            "Home_Score": "46",
+                            "Away": "Broncos",
+                            "Away_Score": "18",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Storm vs Dragons",
+                            "Date": "Saturday 3rd August",
+                            "Home": "Storm",
+                            "Home_Score": "16",
+                            "Away": "Dragons",
+                            "Away_Score": "18",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Sharks vs Rabbitohs",
+                            "Date": "Saturday 3rd August",
+                            "Home": "Sharks",
+                            "Home_Score": "20",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "6",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Panthers vs Knights",
+                            "Date": "Sunday 4th August",
+                            "Home": "Panthers",
+                            "Home_Score": "22",
+                            "Away": "Knights",
+                            "Away_Score": "14",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Bulldogs vs Raiders",
+                            "Date": "Sunday 4th August",
+                            "Home": "Bulldogs",
+                            "Home_Score": "22",
+                            "Away": "Raiders",
+                            "Away_Score": "18",
+                            "Venue": "Belmore Sports Ground, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "23": [
+                        {
+                            "Details": "Rabbitohs vs Storm",
+                            "Date": "Thursday 8th August",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "16",
+                            "Away": "Storm",
+                            "Away_Score": "28",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Titans vs Sharks",
+                            "Date": "Friday 9th August",
+                            "Home": "Titans",
+                            "Home_Score": "0",
+                            "Away": "Sharks",
+                            "Away_Score": "44",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Eels vs Panthers",
+                            "Date": "Friday 9th August",
+                            "Home": "Eels",
+                            "Home_Score": "34",
+                            "Away": "Panthers",
+                            "Away_Score": "36",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Raiders vs Sea Eagles",
+                            "Date": "Saturday 10th August",
+                            "Home": "Raiders",
+                            "Home_Score": "24",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "46",
+                            "Venue": "GIO Stadium, Canberra"
+                        },
+                        {
+                            "Details": "Cowboys vs Broncos",
+                            "Date": "Saturday 10th August",
+                            "Home": "Cowboys",
+                            "Home_Score": "18",
+                            "Away": "Broncos",
+                            "Away_Score": "42",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Dragons vs Bulldogs",
+                            "Date": "Saturday 10th August",
+                            "Home": "Dragons",
+                            "Home_Score": "10",
+                            "Away": "Bulldogs",
+                            "Away_Score": "28",
+                            "Venue": "Netstrata Jubilee Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Dolphins vs Warriors",
+                            "Date": "Sunday 11th August",
+                            "Home": "Dolphins",
+                            "Home_Score": "34",
+                            "Away": "Warriors",
+                            "Away_Score": "32",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Knights vs Wests Tigers",
+                            "Date": "Sunday 11th August",
+                            "Home": "Knights",
+                            "Home_Score": "34",
+                            "Away": "Wests Tigers",
+                            "Away_Score": "18",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        }
+                    ]
+                },
+                {
+                    "24": [
+                        {
+                            "Details": "Panthers vs Storm",
+                            "Date": "Thursday 15th August",
+                            "Home": "Panthers",
+                            "Home_Score": "22",
+                            "Away": "Storm",
+                            "Away_Score": "24",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Warriors",
+                            "Date": "Friday 16th August",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "24",
+                            "Away": "Warriors",
+                            "Away_Score": "10",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Roosters vs Eels",
+                            "Date": "Friday 16th August",
+                            "Home": "Roosters",
+                            "Home_Score": "38",
+                            "Away": "Eels",
+                            "Away_Score": "14",
+                            "Venue": "Allianz Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Bulldogs vs Dolphins",
+                            "Date": "Saturday 17th August",
+                            "Home": "Bulldogs",
+                            "Home_Score": "30",
+                            "Away": "Dolphins",
+                            "Away_Score": "10",
+                            "Venue": "Salter Oval, Bundaberg"
+                        },
+                        {
+                            "Details": "Cowboys vs Raiders",
+                            "Date": "Saturday 17th August",
+                            "Home": "Cowboys",
+                            "Home_Score": "42",
+                            "Away": "Raiders",
+                            "Away_Score": "4",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Rabbitohs",
+                            "Date": "Saturday 17th August",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "18",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "16",
+                            "Venue": "Campbelltown Sports Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Dragons vs Titans",
+                            "Date": "Sunday 18th August",
+                            "Home": "Dragons",
+                            "Home_Score": "32",
+                            "Away": "Titans",
+                            "Away_Score": "16",
+                            "Venue": "WIN Stadium, Wollongong"
+                        },
+                        {
+                            "Details": "Sharks vs Knights",
+                            "Date": "Sunday 18th August",
+                            "Home": "Sharks",
+                            "Home_Score": "19",
+                            "Away": "Knights",
+                            "Away_Score": "18",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "25": [
+                        {
+                            "Details": "Wests Tigers vs Sea Eagles",
+                            "Date": "Thursday 22nd August",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "34",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "26",
+                            "Venue": "Leichhardt Oval, Sydney"
+                        },
+                        {
+                            "Details": "Warriors vs Bulldogs",
+                            "Date": "Friday 23rd August",
+                            "Home": "Warriors",
+                            "Home_Score": "18",
+                            "Away": "Bulldogs",
+                            "Away_Score": "34",
+                            "Venue": "Go Media Stadium, Auckland"
+                        },
+                        {
+                            "Details": "Broncos vs Eels",
+                            "Date": "Friday 23rd August",
+                            "Home": "Broncos",
+                            "Home_Score": "30",
+                            "Away": "Eels",
+                            "Away_Score": "24",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Raiders vs Panthers",
+                            "Date": "Saturday 24th August",
+                            "Home": "Raiders",
+                            "Home_Score": "22",
+                            "Away": "Panthers",
+                            "Away_Score": "18",
+                            "Venue": "GIO Stadium, Canberra"
+                        },
+                        {
+                            "Details": "Storm vs Dolphins",
+                            "Date": "Saturday 24th August",
+                            "Home": "Storm",
+                            "Home_Score": "48",
+                            "Away": "Dolphins",
+                            "Away_Score": "6",
+                            "Venue": "AAMI Park, Melbourne"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Knights",
+                            "Date": "Saturday 24th August",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "16",
+                            "Away": "Knights",
+                            "Away_Score": "36",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Titans vs Roosters",
+                            "Date": "Sunday 25th August",
+                            "Home": "Titans",
+                            "Home_Score": "22",
+                            "Away": "Roosters",
+                            "Away_Score": "48",
+                            "Venue": "Cbus Super Stadium, Gold Coast"
+                        },
+                        {
+                            "Details": "Dragons vs Sharks",
+                            "Date": "Sunday 25th August",
+                            "Home": "Dragons",
+                            "Home_Score": "10",
+                            "Away": "Sharks",
+                            "Away_Score": "38",
+                            "Venue": "WIN Stadium, Wollongong"
+                        }
+                    ]
+                },
+                {
+                    "26": [
+                        {
+                            "Details": "Cowboys vs Storm",
+                            "Date": "Thursday 29th August",
+                            "Home": "Cowboys",
+                            "Home_Score": "38",
+                            "Away": "Storm",
+                            "Away_Score": "30",
+                            "Venue": "Queensland Country Bank Stadium, Townsville"
+                        },
+                        {
+                            "Details": "Bulldogs vs Sea Eagles",
+                            "Date": "Friday 30th August",
+                            "Home": "Bulldogs",
+                            "Home_Score": "22",
+                            "Away": "Sea Eagles",
+                            "Away_Score": "34",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Panthers vs Rabbitohs",
+                            "Date": "Friday 30th August",
+                            "Home": "Panthers",
+                            "Home_Score": "34",
+                            "Away": "Rabbitohs",
+                            "Away_Score": "12",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Eels vs Dragons",
+                            "Date": "Saturday 31st August",
+                            "Home": "Eels",
+                            "Home_Score": "44",
+                            "Away": "Dragons",
+                            "Away_Score": "40",
+                            "Venue": "CommBank Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Dolphins vs Broncos",
+                            "Date": "Saturday 31st August",
+                            "Home": "Dolphins",
+                            "Home_Score": "40",
+                            "Away": "Broncos",
+                            "Away_Score": "6",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Sharks vs Warriors",
+                            "Date": "Saturday 31st August",
+                            "Home": "Sharks",
+                            "Home_Score": "28",
+                            "Away": "Warriors",
+                            "Away_Score": "30",
+                            "Venue": "PointsBet Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Knights vs Titans",
+                            "Date": "Sunday 1st September",
+                            "Home": "Knights",
+                            "Home_Score": "36",
+                            "Away": "Titans",
+                            "Away_Score": "14",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        },
+                        {
+                            "Details": "Roosters vs Raiders",
+                            "Date": "Sunday 1st September",
+                            "Home": "Roosters",
+                            "Home_Score": "12",
+                            "Away": "Raiders",
+                            "Away_Score": "14",
+                            "Venue": "Allianz Stadium, Sydney"
+                        }
+                    ]
+                },
+                {
+                    "27": [
+                        {
+                            "Details": "Broncos vs Storm",
+                            "Date": "Thursday 5th September",
+                            "Home": "Broncos",
+                            "Home_Score": "12",
+                            "Away": "Storm",
+                            "Away_Score": "50",
+                            "Venue": "Suncorp Stadium, Brisbane"
+                        },
+                        {
+                            "Details": "Wests Tigers vs Eels",
+                            "Date": "Friday 6th September",
+                            "Home": "Wests Tigers",
+                            "Home_Score": "26",
+                            "Away": "Eels",
+                            "Away_Score": "60",
+                            "Venue": "Campbelltown Sports Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Rabbitohs vs Roosters",
+                            "Date": "Friday 6th September",
+                            "Home": "Rabbitohs",
+                            "Home_Score": "28",
+                            "Away": "Roosters",
+                            "Away_Score": "36",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Dragons vs Raiders",
+                            "Date": "Saturday 7th September",
+                            "Home": "Dragons",
+                            "Home_Score": "24",
+                            "Away": "Raiders",
+                            "Away_Score": "26",
+                            "Venue": "Netstrata Jubilee Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Bulldogs vs Cowboys",
+                            "Date": "Saturday 7th September",
+                            "Home": "Bulldogs",
+                            "Home_Score": "6",
+                            "Away": "Cowboys",
+                            "Away_Score": "44",
+                            "Venue": "Accor Stadium, Sydney"
+                        },
+                        {
+                            "Details": "Panthers vs Titans",
+                            "Date": "Saturday 7th September",
+                            "Home": "Panthers",
+                            "Home_Score": "18",
+                            "Away": "Titans",
+                            "Away_Score": "12",
+                            "Venue": "BlueBet Stadium, Penrith"
+                        },
+                        {
+                            "Details": "Sea Eagles vs Sharks",
+                            "Date": "Sunday 8th September",
+                            "Home": "Sea Eagles",
+                            "Home_Score": "20",
+                            "Away": "Sharks",
+                            "Away_Score": "40",
+                            "Venue": "4 Pines Park, Sydney"
+                        },
+                        {
+                            "Details": "Knights vs Dolphins",
+                            "Date": "Sunday 8th September",
+                            "Home": "Knights",
+                            "Home_Score": "14",
+                            "Away": "Dolphins",
+                            "Away_Score": "6",
+                            "Venue": "McDonald Jones Stadium, Newcastle"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
