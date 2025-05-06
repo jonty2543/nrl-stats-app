@@ -7,8 +7,8 @@ import numpy as np
 
 def get_player_stats():
     
-    with open("data/player_statistics_2023.json", "r") as file:
-        data_2023 = json.load(file)
+    #with open("data/player_statistics_2023.json", "r") as file:
+        #data_2023 = json.load(file)
         
     with open("data/player_statistics_2024_r1-6.json", "r") as file:
         data_r1_6 = json.load(file)
