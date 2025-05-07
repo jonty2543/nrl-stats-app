@@ -115,7 +115,7 @@ def player_data_cleaner_simple(df, match_data):
     pattern = np.tile(np.concatenate([['Home Team'] * n, ['Away Team'] * n]), rows // (2 * n) + 1)[:rows]
     
     # Assign values based on the pattern
-    df['Team_Name'] = df.lookup(df.index, pattern)
+    df['Team_Name'] = df.apply(lambda row: row[pattern[row.name]], axis=1)
     
     df['Opposition'] = df['Away Team']  # Default value
     df.loc[df['Team_Name'] == df['Home Team'], 'Opposition'] = df['Away Team']
