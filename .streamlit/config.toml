@@ -1,0 +1,6 @@
+[theme]
+primaryColor = "#A8FF00"         # Lime green (NRL-style)
+backgroundColor = "#0A1F44"      # Dark navy blue
+secondaryBackgroundColor = "#2E4B8E"  # Slightly lighter blue for contrast
+textColor = "#F5F5F5"            # Off-white / very light grey
+font = "sans serif"
