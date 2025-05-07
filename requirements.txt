@@ -1,6 +1,6 @@
 matplotlib
 numpy
-pandas==1.4.2
+pandas
 openai
 streamlit
 plotly
