@@ -181,7 +181,7 @@ if page == "Page 1":
             title=dict(text=f"{stat1} Comparison: {player1} vs {player2}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -219,7 +219,7 @@ if page == "Page 1":
             title=dict(text=f"{stat2} Comparison: {player1} vs {player2}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat2}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -265,7 +265,7 @@ if page == "Page 1":
             title=dict(text=f"{stat1} Comparison: {player1} vs {player2}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -299,7 +299,7 @@ if page == "Page 1":
             title=dict(text=f"{stat1}: {player1}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -326,7 +326,7 @@ if page == "Page 1":
             title=dict(text=f"{stat2}: {player1}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -358,7 +358,7 @@ if page == "Page 1":
             title=dict(text=f"{stat1}: {player1}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -445,7 +445,7 @@ if page == "Page 1":
                     title=dict(text=stat2, font=dict(color='black')),
                     tickfont=dict(color='black')
                 ),
-                legend=dict(font=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.1, x=0.5),
                 plot_bgcolor='#99AEDE',
                 paper_bgcolor='#99AEDE',
                 font=dict(color='black'),  # Optional fallback
@@ -523,7 +523,7 @@ if page == "Page 1":
                     title=dict(text=stat2, font=dict(color='black')),
                     tickfont=dict(color='black')
                 ),
-                legend=dict(font=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.1, x=0.5),
                 plot_bgcolor='#99AEDE',
                 paper_bgcolor='#99AEDE',
                 font=dict(color='black'),  # Optional fallback
@@ -606,7 +606,7 @@ if page == "Page 1":
                     title=dict(text=stat2, font=dict(color='black')),
                     tickfont=dict(color='black')
                 ),
-                legend=dict(font=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.1, x=0.5),
                 plot_bgcolor='#99AEDE',
                 paper_bgcolor='#99AEDE',
                 font=dict(color='black'),  # Optional fallback
@@ -734,7 +734,7 @@ elif page == "Page 2":
             title=dict(text=f"{stat1} Comparison: {team1} vs {team2}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -772,7 +772,7 @@ elif page == "Page 2":
             title=dict(text=f"{stat2} Comparison: {team1} vs {team2}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat2}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -818,7 +818,7 @@ elif page == "Page 2":
             title=dict(text=f"{stat1} Comparison: {team1} vs {team2}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -852,7 +852,7 @@ elif page == "Page 2":
             title=dict(text=f"{stat1}: {team1}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -879,7 +879,7 @@ elif page == "Page 2":
             title=dict(text=f"{stat2}: {team1}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -911,7 +911,7 @@ elif page == "Page 2":
             title=dict(text=f"{stat1}: {team1}", font=dict(color='black')),
             xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
             yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black')),
+            legend=dict(font=dict(color='black'), y=1.1, x=0.5),
             plot_bgcolor='#99AEDE',
             paper_bgcolor='#99AEDE'
         )
@@ -999,7 +999,7 @@ elif page == "Page 2":
                     title=dict(text=stat2, font=dict(color='black')),
                     tickfont=dict(color='black')
                 ),
-                legend=dict(font=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.1, x=0.5),
                 plot_bgcolor='#99AEDE',
                 paper_bgcolor='#99AEDE',
                 font=dict(color='black'),  # Optional fallback
@@ -1077,7 +1077,7 @@ elif page == "Page 2":
                     title=dict(text=stat2, font=dict(color='black')),
                     tickfont=dict(color='black')
                 ),
-                legend=dict(font=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.1, x=0.5),
                 plot_bgcolor='#99AEDE',
                 paper_bgcolor='#99AEDE',
                 font=dict(color='black'),  # Optional fallback
@@ -1160,7 +1160,7 @@ elif page == "Page 2":
                     title=dict(text=stat2, font=dict(color='black')),
                     tickfont=dict(color='black')
                 ),
-                legend=dict(font=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.1, x=0.5),
                 plot_bgcolor='#99AEDE',
                 paper_bgcolor='#99AEDE',
                 font=dict(color='black'),  # Optional fallback
