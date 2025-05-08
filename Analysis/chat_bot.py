@@ -31,7 +31,7 @@ df = df[df['Year'].isin(years)]
 df.rename(columns={"Total Points": "Fantasy"}, inplace=True)
 
 
-st.title("NRL 2025 Stat Chat")
+st.title("NRL 2025 Stat Grapher")
 
 def plotly_chart_custom(fig):
     fig.update_layout(
