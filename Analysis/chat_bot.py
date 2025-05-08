@@ -73,7 +73,7 @@ with col3:
 
 
 # Handle page navigation
-page = st.session_state.get("page", "Home")
+page = st.session_state.get("page", "Page 1")
 
 if page == "Page 1":
     st.header("Player Comparison")
