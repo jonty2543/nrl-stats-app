@@ -188,7 +188,7 @@ page = st.radio(
 
 if page == "Player Comparison":
     st.header("Player Comparison")
-    left_col, right_col = st.columns([1, 2], gap="large")
+    left_col, right_col = st.columns([1.3, 2], gap="large")
 
     with left_col:
         player1 = st.selectbox("Select Player 1", player_list)
@@ -205,8 +205,8 @@ if page == "Player Comparison":
                 "Player": player1,
                 "Stat": stat1,
                 "Average": f"{df_p1_stat1.mean():.2f}",
-                "Min": df_p1_stat1.min(),
-                "Max": df_p1_stat1.max()
+                "Min": f"{df_p1_stat1.min():.2f}",
+                "Max": f"{df_p1_stat1.max():.2f}"
             })
 
         # Player 2 Stat 1
@@ -216,8 +216,8 @@ if page == "Player Comparison":
                 "Player": player2,
                 "Stat": stat1,
                 "Average": f"{df_p2_stat1.mean():.2f}",
-                "Min": df_p2_stat1.min(),
-                "Max": df_p2_stat1.max()
+                "Min": f"{df_p2_stat1.min():.2f}",
+                "Max": f"{df_p2_stat1.max():.2f}"
             })
 
         # Player 1 Stat 2
@@ -227,8 +227,8 @@ if page == "Player Comparison":
                 "Player": player1,
                 "Stat": stat2,
                 "Average": f"{df_p1_stat2.mean():.2f}",
-                "Min": df_p1_stat2.min(),
-                "Max": df_p1_stat2.max()
+                "Min": f"{df_p1_stat2.min():.2f}",
+                "Max": f"{df_p1_stat2.max():.2f}"
             })
             
         # Player 2 Stat 2
@@ -238,8 +238,8 @@ if page == "Player Comparison":
                 "Player": player2,
                 "Stat": stat2,
                 "Average": f"{df_p2_stat2.mean():.2f}",
-                "Min": df_p2_stat2.min(),
-                "Max": df_p2_stat2.max()
+                "Min": f"{df_p2_stat2.min():.2f}",
+                "Max": f"{df_p2_stat2.max():.2f}"
             })
 
         # Display the summary table
@@ -760,8 +760,8 @@ elif page == "Teams Comparison":
             "team": team1,
             "Stat": stat1,
             "Average": f"{df_p1_stat1.mean():.2f}",
-            "Min": df_p1_stat1.min(),
-            "Max": df_p1_stat1.max()
+            "Min": f"{df_p1_stat1.min():.2f}",
+            "Max": f"{df_p1_stat1.max():.2f}"
         })
 
     # team 2 Stat 1
@@ -771,8 +771,8 @@ elif page == "Teams Comparison":
             "team": team2,
             "Stat": stat1,
             "Average": f"{df_p2_stat1.mean():.2f}",
-            "Min": df_p2_stat1.min(),
-            "Max": df_p2_stat1.max()
+            "Min": f"{df_p2_stat1.min():.2f}",
+            "Max": f"{df_p2_stat1.max():.2f}"
         })
 
     # team 1 Stat 2
@@ -782,8 +782,8 @@ elif page == "Teams Comparison":
             "team": team1,
             "Stat": stat2,
             "Average": f"{df_p1_stat2.mean():.2f}",
-            "Min": df_p1_stat2.min(),
-            "Max": df_p1_stat2.max()
+            "Min": f"{df_p1_stat2.min():.2f}",
+            "Max": f"{df_p1_stat2.max():.2f}"
         })
         
     # team 2 Stat 2
@@ -793,8 +793,8 @@ elif page == "Teams Comparison":
             "team": team2,
             "Stat": stat2,
             "Average": f"{df_p2_stat2.mean():.2f}",
-            "Min": df_p2_stat2.min(),
-            "Max": df_p2_stat2.max()
+            "Min": f"{df_p2_stat2.min():.2f}",
+            "Max": f"{df_p2_stat2.max():.2f}"
         })
 
     # Display the summary table
