@@ -259,14 +259,14 @@ def _add_trendline_and_correlation(fig, x, y, stat1, stat2, title):
 
 
 def _opposition_label(frame):
+    if "Opposition" in frame.columns:
+        return frame["Opposition"]
     if {"Home Team", "Away Team", "Team_Name"}.issubset(frame.columns):
         return np.where(
             frame["Team_Name"] == frame["Home Team"],
             frame["Away Team"],
             frame["Home Team"]
         )
-    if "Opposition" in frame.columns:
-        return frame["Opposition"]
     return ""
 
 
