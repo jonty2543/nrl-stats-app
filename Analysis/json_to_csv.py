@@ -44,6 +44,44 @@ def _fetch_all_rows(table_name, schema="nrl", page_size=1000):
     return all_rows
 
 
+def _round_to_sort(round_value):
+    if round_value is None or pd.isna(round_value):
+        return None
+    round_str = str(round_value)
+    finals_map = {
+        "Finals Week 1": 28,
+        "Finals Week 2": 29,
+        "Finals Week 3": 30,
+        "Grand Final": 31,
+    }
+    for key, value in finals_map.items():
+        if key.lower() in round_str.lower():
+            return value
+    digits = pd.to_numeric(pd.Series([round_str]).str.extract(r'(\d+)', expand=False), errors='coerce')
+    if digits.notna().iloc[0]:
+        return int(digits.iloc[0])
+    return None
+
+
+def _round_to_label(round_value):
+    if round_value is None or pd.isna(round_value):
+        return ""
+    round_str = str(round_value)
+    finals_map = {
+        "Finals Week 1": "FW1",
+        "Finals Week 2": "FW2",
+        "Finals Week 3": "FW3",
+        "Grand Final": "GF",
+    }
+    for key, value in finals_map.items():
+        if key.lower() in round_str.lower():
+            return value
+    digits = pd.to_numeric(pd.Series([round_str]).str.extract(r'(\d+)', expand=False), errors='coerce')
+    if digits.notna().iloc[0]:
+        return str(int(digits.iloc[0]))
+    return round_str
+
+
 def get_player_stats():
     player_rows = _fetch_all_rows("player_stats")
     if not player_rows:
@@ -52,21 +90,25 @@ def get_player_stats():
     df = pd.DataFrame(player_rows)
     df["match_date"] = pd.to_datetime(df["match_date"])
     df["Year"] = df["match_date"].dt.year.astype(str)
-    df["Round"] = df["round"]
+    df["Round"] = df["round"].apply(_round_to_sort)
+    df["Round_Label"] = df["round"].apply(_round_to_label)
 
     matches_rows = _fetch_all_rows("matches")
     if matches_rows:
         matches_df = pd.DataFrame(matches_rows)
         matches_df["match_date"] = pd.to_datetime(matches_df["match_date"])
-        opponent_lookup = matches_df[["match_date", "team", "opponent_team"]].drop_duplicates()
+        opponent_lookup = (
+            matches_df[["match_date", "team", "opponent_team"]]
+            .drop_duplicates()
+            .rename(columns={"opponent_team": "opponent_team_match"})
+        )
         df = df.merge(
             opponent_lookup,
             left_on=["match_date", "team"],
             right_on=["match_date", "team"],
             how="left",
         )
-        df["Opposition"] = df["opponent_team"]
-        df["Team_Name"] = df["team"]
+        df["Opponent"] = df["opponent_team_match"]
 
     match_df = get_match_data(sorted(df["Year"].unique().tolist()))
     if not match_df.empty:
@@ -94,6 +136,7 @@ def get_player_stats():
     rename_map = {
         "player": "Name",
         "team": "Team",
+        "opponent_team": "Opponent",
         "number": "Number",
         "position": "Position",
         "mins_played": "Mins Played",
@@ -154,7 +197,7 @@ def get_player_stats():
     }
 
     df = df.rename(columns=rename_map)
-    df = df.drop(columns=["Date", "opponent_team"], errors="ignore")
+    df = df.drop(columns=["Date", "opponent_team_match", "opponent_team"], errors="ignore")
     df = df.drop_duplicates(subset=["Name", "Round", "Year"], keep="first").reset_index(drop=True)
 
     df["Home Team"] = df["Home Team"].astype("string").str.replace("-", " ", regex=False)
@@ -172,6 +215,8 @@ def get_match_data(years):
     df = pd.DataFrame(matches_rows)
     df["match_date"] = pd.to_datetime(df["match_date"])
     df["Year"] = df["match_date"].dt.year.astype(str)
+    df["Round"] = df["round"].apply(_round_to_sort)
+    df["Round_Label"] = df["round"].apply(_round_to_label)
     if years:
         df = df[df["Year"].isin([str(year) for year in years])]
 
@@ -186,12 +231,11 @@ def get_match_data(years):
             "score": "Home_Score",
             "opponent_team": "Away",
             "opponent_score": "Away_Score",
-            "round": "Round",
         }
     )
 
     home_df["Venue"] = None
-    match_df = home_df[["Year", "Round", "Date", "Home", "Home_Score", "Away", "Away_Score", "Venue"]]
+    match_df = home_df[["Year", "Round", "Round_Label", "Date", "Home", "Home_Score", "Away", "Away_Score", "Venue"]]
     match_df = match_df.drop_duplicates(subset=["Date", "Home", "Away"]).reset_index(drop=True)
 
     return match_df
@@ -206,6 +250,8 @@ def get_detailed_match(years):
     df = pd.DataFrame(matches_rows)
     df["match_date"] = pd.to_datetime(df["match_date"])
     df["Year"] = df["match_date"].dt.year.astype(str)
+    df["Round"] = df["round"].apply(_round_to_sort)
+    df["Round_Label"] = df["round"].apply(_round_to_label)
     if years:
         df = df[df["Year"].isin([str(year) for year in years])]
 
@@ -221,7 +267,8 @@ def get_detailed_match(years):
     match_detailed = pd.DataFrame(
         {
             "Year": df["Year"],
-            "Round": df["round"],
+            "Round": df["Round"],
+            "Round Label": df["Round_Label"],
             "Match": df["Match"],
             "Ground Condition": df.get("ground_conditions"),
             "Weather Condition": df.get("weather_conditions"),

@@ -503,11 +503,9 @@ def player_data_cleaner_simple(df, match_data):
 
     df = df.drop_duplicates(subset=['Name', 'Round', 'Year'])
 
-    if 'Team_Name' not in df.columns and 'Team' in df.columns:
-        df['Team_Name'] = df['Team']
-    if 'Opposition' not in df.columns and {'Home Team', 'Away Team', 'Team_Name'}.issubset(df.columns):
-        df['Opposition'] = np.where(
-            df['Team_Name'] == df['Home Team'],
+    if 'Opponent' not in df.columns and {'Home Team', 'Away Team', 'Team'}.issubset(df.columns):
+        df['Opponent'] = np.where(
+            df['Team'] == df['Home Team'],
             df['Away Team'],
             df['Home Team']
         )

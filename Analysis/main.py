@@ -126,6 +126,10 @@ if df_all.empty:
     st.error("No data returned from Supabase.")
     st.stop()
 
+df_all = df_all.loc[:, ~df_all.columns.duplicated()].copy()
+if "Opponent" in df_all.columns and isinstance(df_all["Opponent"], pd.DataFrame):
+    df_all["Opponent"] = df_all["Opponent"].iloc[:, 0]
+
 available_years = sorted(df_all['Year'].dropna().unique().tolist(), reverse=True)
 with st.container():
     year_choice = st.selectbox("Year", available_years, index=0)
@@ -259,13 +263,20 @@ def _add_trendline_and_correlation(fig, x, y, stat1, stat2, title):
 
 
 def _opposition_label(frame):
+    def _col(series_or_df):
+        if isinstance(series_or_df, pd.DataFrame):
+            return series_or_df.iloc[:, 0]
+        return series_or_df
+
+    if "Opponent" in frame.columns:
+        return _col(frame["Opponent"])
     if "Opposition" in frame.columns:
-        return frame["Opposition"]
-    if {"Home Team", "Away Team", "Team_Name"}.issubset(frame.columns):
+        return _col(frame["Opposition"])
+    if {"Home Team", "Away Team", "Team"}.issubset(frame.columns):
         return np.where(
-            frame["Team_Name"] == frame["Home Team"],
-            frame["Away Team"],
-            frame["Home Team"]
+            _col(frame["Team"]) == _col(frame["Home Team"]),
+            _col(frame["Away Team"]),
+            _col(frame["Home Team"])
         )
     return ""
 
@@ -274,11 +285,22 @@ def _prepare_round_plot_df(frame):
     frame = frame.copy()
     if "Round" in frame.columns:
         frame = frame.sort_values("Round")
-    frame["Opposition_Label"] = pd.Series(_opposition_label(frame), index=frame.index).astype(str)
+    if "Round_Label" in frame.columns:
+        frame["Round_Display"] = frame["Round_Label"].astype(str)
+    else:
+        frame["Round_Display"] = frame["Round"].astype(str)
+    finals_labels = {"FW1", "FW2", "FW3", "GF"}
+    frame["Round_Hover"] = np.where(
+        frame["Round_Display"].isin(finals_labels),
+        frame["Round_Display"],
+        "Rd " + frame["Round_Display"]
+    )
+    labels = np.asarray(_opposition_label(frame)).reshape(-1)
+    frame["Opposition_Label"] = pd.Series(labels, index=frame.index).astype(str)
     return frame
 
 
-team_list = sorted(df['Team_Name'].dropna().unique().tolist())
+team_list = sorted(df['Team'].dropna().unique().tolist())
 player_list = sorted(df['Name'].dropna().unique().tolist())
 player_stat_list = [stat for stat in EV.PLAYER_STATS if stat in df.columns]
 team_stat_list = [stat for stat in EV.TEAM_STATS if stat in df.columns]
@@ -295,8 +317,13 @@ if page == "Player Comparison":
     left_col, right_col = st.columns([1.3, 2], gap="large")
 
     with left_col:
-        player1 = st.selectbox("Select Player 1", player_list)
-        player2 = st.selectbox("Select Player 2 (Optional)", ["None"] + player_list)
+        player1_query = st.text_input("Search Player 1")
+        player1_options = [p for p in player_list if player1_query.lower() in p.lower()] if player1_query else player_list
+        player1 = st.selectbox("Select Player 1", player1_options)
+
+        player2_query = st.text_input("Search Player 2 (Optional)")
+        player2_options = [p for p in player_list if player2_query.lower() in p.lower()] if player2_query else player_list
+        player2 = st.selectbox("Select Player 2 (Optional)", ["None"] + player2_options)
         stat1 = st.selectbox("Select Stat 1", player_stat_list)
         stat2 = st.selectbox("Select Stat 2 (Optional)", ["None"] + player_stat_list)
 
@@ -373,26 +400,26 @@ if page == "Player Comparison":
             
             # Team 1
             fig1.add_trace(go.Scatter(
-                x=df_player1['Round'],
+                x=df_player1['Round_Display'],
                 y=df_player1[stat1],
                 mode='lines+markers',
                 name=f"{player1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str),
+                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),
                 hoverinfo='text'
                 
             ))
             
             # Team 2
             fig1.add_trace(go.Scatter(
-                x=df_player2['Round'],
+                x=df_player2['Round_Display'],
                 y=df_player2[stat1],
                 mode='lines+markers',
                 name=f"{player2}",
                 marker=dict(symbol='x', size=8),
                 line=dict(color='green'),
-                hovertext=df_player2['Opposition_Label'] + ', Rd ' + df_player2['Round'].astype(str),
+                hovertext=df_player2['Opposition_Label'] + ', ' + df_player2['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             
@@ -412,25 +439,25 @@ if page == "Player Comparison":
             
             # Team 1
             fig2.add_trace(go.Scatter(
-                x=df_player1['Round'],
+                x=df_player1['Round_Display'],
                 y=df_player1[stat2],
                 mode='lines+markers',
                 name=f"{player1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str),
+                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             
             # Team 2
             fig2.add_trace(go.Scatter(
-                x=df_player2['Round'],
+                x=df_player2['Round_Display'],
                 y=df_player2[stat2],
                 mode='lines+markers',
                 name=f"{player2}",
                 marker=dict(symbol='x', size=8),
                 line=dict(color='green'),
-                hovertext=df_player2['Opposition_Label'] + ', Rd ' + df_player2['Round'].astype(str),
+                hovertext=df_player2['Opposition_Label'] + ', ' + df_player2['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             
@@ -457,25 +484,25 @@ if page == "Player Comparison":
             
             # Team 1 for stat1
             fig.add_trace(go.Scatter(
-                x=df_player1['Round'],
+                x=df_player1['Round_Display'],
                 y=df_player1[stat1],
                 mode='lines+markers',
                 name=f"{player1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str),
+                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             
             # Team 2 for stat1
             fig.add_trace(go.Scatter(
-                x=df_player2['Round'],
+                x=df_player2['Round_Display'],
                 y=df_player2[stat1],
                 mode='lines+markers',
                 name=f"{player2}",
                 marker=dict(symbol='x', size=8),
                 line=dict(color='green'),
-                hovertext=df_player2['Opposition_Label'] + ', Rd ' + df_player2['Round'].astype(str),
+                hovertext=df_player2['Opposition_Label'] + ', ' + df_player2['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             
@@ -503,13 +530,13 @@ if page == "Player Comparison":
             
             # Team 1
             fig1.add_trace(go.Scatter(
-                x=df_player1['Round'],
+                x=df_player1['Round_Display'],
                 y=df_player1[stat1],
                 mode='lines+markers',
                 name=f"{player1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str),
+                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),
                 hoverinfo='text'
                 
             ))
@@ -530,13 +557,13 @@ if page == "Player Comparison":
             
             # Team 1
             fig2.add_trace(go.Scatter(
-                x=df_player1['Round'],
+                x=df_player1['Round_Display'],
                 y=df_player1[stat2],
                 mode='lines+markers',
                 name=f"{player1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str),
+                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),
                 hoverinfo='text'
                 
             ))
@@ -562,13 +589,13 @@ if page == "Player Comparison":
             
             # Team 1
             fig1.add_trace(go.Scatter(
-                x=df_player1['Round'],
+                x=df_player1['Round_Display'],
                 y=df_player1[stat1],
                 mode='lines+markers',
                 name=f"{player1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str),
+                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),
                 hoverinfo='text'
                 
             ))
@@ -598,7 +625,7 @@ if page == "Player Comparison":
             # --- Plot 1: Team 1 ---
             x1 = df_player1[stat1]
             y1 = df_player1[stat2]
-            hovertext1 = df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str)
+            hovertext1 = df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str)
             
             fig1 = go.Figure()
             
@@ -626,7 +653,7 @@ if page == "Player Comparison":
             # --- Plot 2: Team 2 ---
             x2 = df_player2[stat1]
             y2 = df_player2[stat2]
-            hovertext2 = df_player2['Opposition_Label'] + ', Rd ' + df_player2['Round'].astype(str)
+            hovertext2 = df_player2['Opposition_Label'] + ', ' + df_player2['Round_Hover'].astype(str)
             
             fig2 = go.Figure()
             
@@ -667,7 +694,7 @@ if page == "Player Comparison":
                     x=x,
                     y=y,
                     mode='markers',  # No 'text' here since we only want hover
-                hovertext=df_player1['Opposition_Label'] + ', Rd ' + df_player1['Round'].astype(str),  # What shows on hover
+                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),  # What shows on hover
                 hoverinfo='text',                  # Use only the text above
                 marker=dict(size=10, color='#1f77b4'),
                 name='Opposition, Round'
@@ -705,13 +732,16 @@ elif page == "Teams Comparison":
         stat1 = st.selectbox("Select Stat 1", team_stat_list)
         stat2 = st.selectbox("Select Stat 2 (Optional)", ["None"] + team_stat_list)
         
-        team_df = df.set_index(['Team_Name', 'Round', 'Opposition']).groupby(['Team_Name', 'Round', 'Opposition'])[team_stat_list].sum().reset_index()
+        group_cols = ['Team', 'Round', 'Opponent']
+        if 'Round_Label' in df.columns:
+            group_cols.append('Round_Label')
+        team_df = df.groupby(group_cols, as_index=False)[team_stat_list].sum()
 
         summary_data = []
 
         # Player 1 Stat 1
         if team1 and stat1:
-            df_p1_stat1 = team_df[team_df['Team_Name'] == team1][stat1]
+            df_p1_stat1 = team_df[team_df['Team'] == team1][stat1]
             summary_data.append({
                 "team": team1,
                 "Stat": stat1,
@@ -722,7 +752,7 @@ elif page == "Teams Comparison":
 
         # team 2 Stat 1
         if team2 != "None" and stat1:
-            df_p2_stat1 = team_df[team_df['Team_Name'] == team2][stat1]
+            df_p2_stat1 = team_df[team_df['Team'] == team2][stat1]
             summary_data.append({
                 "team": team2,
                 "Stat": stat1,
@@ -733,7 +763,7 @@ elif page == "Teams Comparison":
 
         # team 1 Stat 2
         if team1 and stat2 != "None":
-            df_p1_stat2 = team_df[team_df['Team_Name'] == team1][stat2]
+            df_p1_stat2 = team_df[team_df['Team'] == team1][stat2]
             summary_data.append({
                 "team": team1,
                 "Stat": stat2,
@@ -744,7 +774,7 @@ elif page == "Teams Comparison":
             
         # team 2 Stat 2
         if team2 != "None" and stat2 != "None":
-            df_p2_stat2 = team_df[team_df['Team_Name'] == team2][stat2]
+            df_p2_stat2 = team_df[team_df['Team'] == team2][stat2]
             summary_data.append({
                 "team": team2,
                 "Stat": stat2,
@@ -772,28 +802,28 @@ elif page == "Teams Comparison":
         st.write("Hover for opposition")
 
         if plot_type == 4:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team1])
-            df_team2 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team2])
+            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
+            df_team2 = _prepare_round_plot_df(team_df[team_df['Team'] == team2])
             
             fig1 = go.Figure()
             fig1.add_trace(go.Scatter(
-                x=df_team1['Round'],
+                x=df_team1['Round_Display'],
                 y=df_team1[stat1],
                 mode='lines+markers',
                 name=f"{team1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str),
+                hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig1.add_trace(go.Scatter(
-                x=df_team2['Round'],
+                x=df_team2['Round_Display'],
                 y=df_team2[stat1],
                 mode='lines+markers',
                 name=f"{team2}",
                 marker=dict(symbol='x', size=8),
                 line=dict(color='green'),
-                hovertext=df_team2['Opposition_Label'] + ', Rd ' + df_team2['Round'].astype(str),
+                hovertext=df_team2['Opposition_Label'] + ', ' + df_team2['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig1.update_layout(
@@ -808,23 +838,23 @@ elif page == "Teams Comparison":
             
             fig2 = go.Figure()
             fig2.add_trace(go.Scatter(
-                x=df_team1['Round'],
+                x=df_team1['Round_Display'],
                 y=df_team1[stat2],
                 mode='lines+markers',
                 name=f"{team1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str),
+                hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig2.add_trace(go.Scatter(
-                x=df_team2['Round'],
+                x=df_team2['Round_Display'],
                 y=df_team2[stat2],
                 mode='lines+markers',
                 name=f"{team2}",
                 marker=dict(symbol='x', size=8),
                 line=dict(color='green'),
-                hovertext=df_team2['Opposition_Label'] + ', Rd ' + df_team2['Round'].astype(str),
+                hovertext=df_team2['Opposition_Label'] + ', ' + df_team2['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig2.update_layout(
@@ -837,28 +867,28 @@ elif page == "Teams Comparison":
             )
             plotly_chart_custom(fig2)
         elif plot_type == 2:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team1])
-            df_team2 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team2])
+            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
+            df_team2 = _prepare_round_plot_df(team_df[team_df['Team'] == team2])
             
             fig = go.Figure()
             fig.add_trace(go.Scatter(
-                x=df_team1['Round'],
+                x=df_team1['Round_Display'],
                 y=df_team1[stat1],
                 mode='lines+markers',
                 name=f"{team1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str),
+                hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig.add_trace(go.Scatter(
-                x=df_team2['Round'],
+                x=df_team2['Round_Display'],
                 y=df_team2[stat1],
                 mode='lines+markers',
                 name=f"{team2}",
                 marker=dict(symbol='x', size=8),
                 line=dict(color='green'),
-                hovertext=df_team2['Opposition_Label'] + ', Rd ' + df_team2['Round'].astype(str),
+                hovertext=df_team2['Opposition_Label'] + ', ' + df_team2['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig.update_layout(
@@ -871,17 +901,17 @@ elif page == "Teams Comparison":
             )
             plotly_chart_custom(fig)
         elif plot_type == 3:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team1])
+            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
             
             fig1 = go.Figure()
             fig1.add_trace(go.Scatter(
-                x=df_team1['Round'],
+                x=df_team1['Round_Display'],
                 y=df_team1[stat1],
                 mode='lines+markers',
                 name=f"{team1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str),
+                hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig1.update_layout(
@@ -896,13 +926,13 @@ elif page == "Teams Comparison":
             
             fig2 = go.Figure()
             fig2.add_trace(go.Scatter(
-                x=df_team1['Round'],
+                x=df_team1['Round_Display'],
                 y=df_team1[stat2],
                 mode='lines+markers',
                 name=f"{team1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str),
+                hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig2.update_layout(
@@ -915,17 +945,17 @@ elif page == "Teams Comparison":
             )
             plotly_chart_custom(fig2)
         else:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team1])
+            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
             
             fig1 = go.Figure()
             fig1.add_trace(go.Scatter(
-                x=df_team1['Round'],
+                x=df_team1['Round_Display'],
                 y=df_team1[stat1],
                 mode='lines+markers',
                 name=f"{team1}",
                 marker=dict(symbol='circle', size=8),
                 line=dict(color='#1f77b4'),
-                hovertext=df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str),
+                hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
                 hoverinfo='text'
             ))
             fig1.update_layout(
@@ -942,12 +972,12 @@ elif page == "Teams Comparison":
         st.write("Hover for opposition")
 
         if plot_type == 4:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team1])
-            df_team2 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team2])
+            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
+            df_team2 = _prepare_round_plot_df(team_df[team_df['Team'] == team2])
             
             x1 = df_team1[stat1]
             y1 = df_team1[stat2]
-            hovertext1 = df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str)
+            hovertext1 = df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str)
             
             fig1 = go.Figure()
             fig1.add_trace(go.Scatter(
@@ -972,7 +1002,7 @@ elif page == "Teams Comparison":
                 
             x2 = df_team2[stat1]
             y2 = df_team2[stat2]
-            hovertext2 = df_team2['Opposition_Label'] + ', Rd ' + df_team2['Round'].astype(str)
+            hovertext2 = df_team2['Opposition_Label'] + ', ' + df_team2['Round_Hover'].astype(str)
             
             fig2 = go.Figure()
             fig2.add_trace(go.Scatter(
@@ -995,7 +1025,7 @@ elif page == "Teams Comparison":
             )
             plotly_chart_custom(fig2)
         elif plot_type == 3:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team_Name'] == team1])
+            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
 
             if not df_team1.empty:
                 x = df_team1[stat1]
@@ -1006,7 +1036,7 @@ elif page == "Teams Comparison":
                     x=x,
                     y=y,
                     mode='markers',
-                    hovertext=df_team1['Opposition_Label'] + ', Rd ' + df_team1['Round'].astype(str),
+                    hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
                     hoverinfo='text',
                     marker=dict(size=10, color='#1f77b4'),
                     name='Opposition, Round'
