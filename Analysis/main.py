@@ -415,17 +415,99 @@ if page == "Player Comparison":
         plot_type = 1
 
     with right_col:
+        if stat2 != "None":
+            st.subheader(f"📈 {stat1} vs {stat2}:")
+            st.write("Hover for opposition")
+
+            if plot_type == 4:
+                df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
+                df_player2 = _prepare_round_plot_df(df[df['Name'] == player2])
+                
+                x1 = df_player1[stat1]
+                y1 = df_player1[stat2]
+                hovertext1 = df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str)
+                
+                fig1 = go.Figure()
+                fig1.add_trace(go.Scatter(
+                    x=x1,
+                    y=y1,
+                    mode='markers',
+                    hovertext=hovertext1,
+                    hoverinfo='text',
+                    marker=dict(size=10, color='#1f77b4'),
+                    name=player1
+                ))
+                
+                _add_trendline_and_correlation(
+                    fig1,
+                    x1,
+                    y1,
+                    stat1,
+                    stat2,
+                    f"{stat1} vs {stat2}: {player1}"
+                )
+                plotly_chart_custom(fig1)
+                    
+                x2 = df_player2[stat1]
+                y2 = df_player2[stat2]
+                hovertext2 = df_player2['Opposition_Label'] + ', ' + df_player2['Round_Hover'].astype(str)
+                
+                fig2 = go.Figure()
+                fig2.add_trace(go.Scatter(
+                    x=x2,
+                    y=y2,
+                    mode='markers',
+                    hovertext=hovertext2,
+                    hoverinfo='text',
+                    marker=dict(size=10, color='#ff7f0e'),
+                    name=player2
+                ))
+                
+                _add_trendline_and_correlation(
+                    fig2,
+                    x2,
+                    y2,
+                    stat1,
+                    stat2,
+                    f"{stat1} vs {stat2}: {player2}"
+                )
+                plotly_chart_custom(fig2)
+            elif plot_type == 3:
+                df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
+
+                if not df_player1.empty:
+                    x = df_player1[stat1]
+                    y = df_player1[stat2]
+                    
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=x,
+                        y=y,
+                        mode='markers',
+                        hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),
+                        hoverinfo='text',
+                        marker=dict(size=10, color='#1f77b4'),
+                        name='Opposition, Round'
+                    ))
+                
+                    _add_trendline_and_correlation(
+                        fig,
+                        x,
+                        y,
+                        stat1,
+                        stat2,
+                        f"{stat1} vs {stat2}: {player1}"
+                    )
+                    plotly_chart_custom(fig)
+
         st.subheader("📈 Stat Comparison by Round:")
         if plot_type == 4:
 
-            # Filter the DataFrame for each team's data
             df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
             df_player2 = _prepare_round_plot_df(df[df['Name'] == player2])
             
-            # --- Plot 1: stat1 over Round ---
             fig1 = go.Figure()
             
-            # Team 1
             fig1.add_trace(go.Scatter(
                 x=df_player1['Round_Display'],
                 y=df_player1[stat1],
@@ -438,7 +520,6 @@ if page == "Player Comparison":
                 
             ))
             
-            # Team 2
             fig1.add_trace(go.Scatter(
                 x=df_player2['Round_Display'],
                 y=df_player2[stat1],
@@ -461,10 +542,8 @@ if page == "Player Comparison":
             
             plotly_chart_custom(fig1)
             
-            # --- Plot 2: stat2 over Round ---
             fig2 = go.Figure()
             
-            # Team 1
             fig2.add_trace(go.Scatter(
                 x=df_player1['Round_Display'],
                 y=df_player1[stat2],
@@ -476,7 +555,6 @@ if page == "Player Comparison":
                 hoverinfo='text'
             ))
             
-            # Team 2
             fig2.add_trace(go.Scatter(
                 x=df_player2['Round_Display'],
                 y=df_player2[stat2],
@@ -502,14 +580,11 @@ if page == "Player Comparison":
 
         elif plot_type == 2:
         
-            # Filter the DataFrame for each team's data
             df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
             df_player2 = _prepare_round_plot_df(df[df['Name'] == player2])
             
-            # Create the figure for comparing stat1
             fig = go.Figure()
             
-            # Team 1 for stat1
             fig.add_trace(go.Scatter(
                 x=df_player1['Round_Display'],
                 y=df_player1[stat1],
@@ -521,7 +596,6 @@ if page == "Player Comparison":
                 hoverinfo='text'
             ))
             
-            # Team 2 for stat1
             fig.add_trace(go.Scatter(
                 x=df_player2['Round_Display'],
                 y=df_player2[stat1],
@@ -533,7 +607,6 @@ if page == "Player Comparison":
                 hoverinfo='text'
             ))
             
-            # Update the layout for the figure
             fig.update_layout(
                 title=dict(text=f"{stat1} Comparison: {player1} vs {player2}", font=dict(color='black')),
                 xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
@@ -543,19 +616,14 @@ if page == "Player Comparison":
                 paper_bgcolor='#99AEDE'
             )
             
-            # Display the figure
             plotly_chart_custom(fig) 
 
         elif plot_type == 3:
             
-            # Filter the DataFrame for each team's data
             df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
 
-            
-            # --- Plot 1: stat1 over Round ---
             fig1 = go.Figure()
             
-            # Team 1
             fig1.add_trace(go.Scatter(
                 x=df_player1['Round_Display'],
                 y=df_player1[stat1],
@@ -579,10 +647,8 @@ if page == "Player Comparison":
             
             plotly_chart_custom(fig1)
             
-            # --- Plot 2: stat2 ---
             fig2 = go.Figure()
             
-            # Team 1
             fig2.add_trace(go.Scatter(
                 x=df_player1['Round_Display'],
                 y=df_player1[stat2],
@@ -608,13 +674,10 @@ if page == "Player Comparison":
                         
         else:
             
-            # Filter the DataFrame for each team's data
             df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
             
-            # --- Plot 1: stat1 over Round ---
             fig1 = go.Figure()
             
-            # Team 1
             fig1.add_trace(go.Scatter(
                 x=df_player1['Round_Display'],
                 y=df_player1[stat1],
@@ -637,109 +700,6 @@ if page == "Player Comparison":
             )
             
             plotly_chart_custom(fig1)
-
-
-        st.subheader(f"📈 {stat1} vs {stat2}:")
-        st.write("Hover for opposition")
-
-
-        #if st.button("Create Stat Plot/s"):
-        if plot_type == 4:
-            # Filter the DataFrame for each team's data
-            df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
-            df_player2 = _prepare_round_plot_df(df[df['Name'] == player2])
-            
-            # --- Plot 1: Team 1 ---
-            x1 = df_player1[stat1]
-            y1 = df_player1[stat2]
-            hovertext1 = df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str)
-            
-            fig1 = go.Figure()
-            
-            # Scatter points
-            fig1.add_trace(go.Scatter(
-                x=x1,
-                y=y1,
-                mode='markers',
-                hovertext=hovertext1,
-                hoverinfo='text',
-                marker=dict(size=10, color='#1f77b4'),
-                name=player1
-            ))
-            
-            _add_trendline_and_correlation(
-                fig1,
-                x1,
-                y1,
-                stat1,
-                stat2,
-                f"{stat1} vs {stat2}: {player1}"
-            )
-            plotly_chart_custom(fig1)
-                
-            # --- Plot 2: Team 2 ---
-            x2 = df_player2[stat1]
-            y2 = df_player2[stat2]
-            hovertext2 = df_player2['Opposition_Label'] + ', ' + df_player2['Round_Hover'].astype(str)
-            
-            fig2 = go.Figure()
-            
-            # Scatter points
-            fig2.add_trace(go.Scatter(
-                x=x2,
-                y=y2,
-                mode='markers',
-                hovertext=hovertext2,
-                hoverinfo='text',
-                marker=dict(size=10, color='#ff7f0e'),
-                name=player2
-            ))
-            
-            _add_trendline_and_correlation(
-                fig2,
-                x2,
-                y2,
-                stat1,
-                stat2,
-                f"{stat1} vs {stat2}: {player2}"
-            )
-            plotly_chart_custom(fig2)
-            
-
-        elif plot_type == 3:
-            
-            df_player1 = _prepare_round_plot_df(df[df['Name'] == player1])
-
-
-            if not df_player1.empty:
-                x = df_player1[stat1]
-                y = df_player1[stat2]
-                
-                fig = go.Figure()
-            
-                fig.add_trace(go.Scatter(
-                    x=x,
-                    y=y,
-                    mode='markers',  # No 'text' here since we only want hover
-                hovertext=df_player1['Opposition_Label'] + ', ' + df_player1['Round_Hover'].astype(str),  # What shows on hover
-                hoverinfo='text',                  # Use only the text above
-                marker=dict(size=10, color='#1f77b4'),
-                name='Opposition, Round'
-                ))
-            
-                _add_trendline_and_correlation(
-                    fig,
-                    x,
-                    y,
-                    stat1,
-                    stat2,
-                    f"{stat1} vs {stat2}: {player1}"
-                )
-                plotly_chart_custom(fig)
-
-
-        else:
-            st.write("Please add a 2nd stat")
 
         
         
@@ -825,6 +785,90 @@ elif page == "Teams Comparison":
         plot_type = 1
         
     with right_col:
+        if stat2 != "None":
+            st.subheader(f"📈 {stat1} vs {stat2}:")
+            st.write("Hover for opposition")
+
+            if plot_type == 4:
+                df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
+                df_team2 = _prepare_round_plot_df(team_df[team_df['Team'] == team2])
+                
+                x1 = df_team1[stat1]
+                y1 = df_team1[stat2]
+                hovertext1 = df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str)
+                
+                fig1 = go.Figure()
+                fig1.add_trace(go.Scatter(
+                    x=x1,
+                    y=y1,
+                    mode='markers',
+                    hovertext=hovertext1,
+                    hoverinfo='text',
+                    marker=dict(size=10, color='#1f77b4'),
+                    name=team1
+                ))
+                
+                _add_trendline_and_correlation(
+                    fig1,
+                    x1,
+                    y1,
+                    stat1,
+                    stat2,
+                    f"{stat1} vs {stat2}: {team1}"
+                )
+                plotly_chart_custom(fig1)
+                    
+                x2 = df_team2[stat1]
+                y2 = df_team2[stat2]
+                hovertext2 = df_team2['Opposition_Label'] + ', ' + df_team2['Round_Hover'].astype(str)
+                
+                fig2 = go.Figure()
+                fig2.add_trace(go.Scatter(
+                    x=x2,
+                    y=y2,
+                    mode='markers',
+                    hovertext=hovertext2,
+                    hoverinfo='text',
+                    marker=dict(size=10, color='#ff7f0e'),
+                    name=team2
+                ))
+                
+                _add_trendline_and_correlation(
+                    fig2,
+                    x2,
+                    y2,
+                    stat1,
+                    stat2,
+                    f"{stat1} vs {stat2}: {team2}"
+                )
+                plotly_chart_custom(fig2)
+            elif plot_type == 3:
+                df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
+
+                if not df_team1.empty:
+                    x = df_team1[stat1]
+                    y = df_team1[stat2]
+                    
+                    fig = go.Figure()
+                    fig.add_trace(go.Scatter(
+                        x=x,
+                        y=y,
+                        mode='markers',
+                        hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
+                        hoverinfo='text',
+                        marker=dict(size=10, color='#1f77b4'),
+                        name='Opposition, Round'
+                    ))
+                    _add_trendline_and_correlation(
+                        fig,
+                        x,
+                        y,
+                        stat1,
+                        stat2,
+                        f"{stat1} vs {stat2}: {team1}"
+                    )
+                    plotly_chart_custom(fig)
+
         st.subheader("📈 Stat Comparison by Round:")
         st.write("Hover for opposition")
 
@@ -994,91 +1038,6 @@ elif page == "Teams Comparison":
                 paper_bgcolor='#99AEDE'
             )
             plotly_chart_custom(fig1)
-
-        st.subheader(f"📈 {stat1} vs {stat2}:")
-        st.write("Hover for opposition")
-
-        if plot_type == 4:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
-            df_team2 = _prepare_round_plot_df(team_df[team_df['Team'] == team2])
-            
-            x1 = df_team1[stat1]
-            y1 = df_team1[stat2]
-            hovertext1 = df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str)
-            
-            fig1 = go.Figure()
-            fig1.add_trace(go.Scatter(
-                x=x1,
-                y=y1,
-                mode='markers',
-                hovertext=hovertext1,
-                hoverinfo='text',
-                marker=dict(size=10, color='#1f77b4'),
-                name=team1
-            ))
-            
-            _add_trendline_and_correlation(
-                fig1,
-                x1,
-                y1,
-                stat1,
-                stat2,
-                f"{stat1} vs {stat2}: {team1}"
-            )
-            plotly_chart_custom(fig1)
-                
-            x2 = df_team2[stat1]
-            y2 = df_team2[stat2]
-            hovertext2 = df_team2['Opposition_Label'] + ', ' + df_team2['Round_Hover'].astype(str)
-            
-            fig2 = go.Figure()
-            fig2.add_trace(go.Scatter(
-                x=x2,
-                y=y2,
-                mode='markers',
-                hovertext=hovertext2,
-                hoverinfo='text',
-                marker=dict(size=10, color='#ff7f0e'),
-                name=team2
-            ))
-            
-            _add_trendline_and_correlation(
-                fig2,
-                x2,
-                y2,
-                stat1,
-                stat2,
-                f"{stat1} vs {stat2}: {team2}"
-            )
-            plotly_chart_custom(fig2)
-        elif plot_type == 3:
-            df_team1 = _prepare_round_plot_df(team_df[team_df['Team'] == team1])
-
-            if not df_team1.empty:
-                x = df_team1[stat1]
-                y = df_team1[stat2]
-                
-                fig = go.Figure()
-                fig.add_trace(go.Scatter(
-                    x=x,
-                    y=y,
-                    mode='markers',
-                    hovertext=df_team1['Opposition_Label'] + ', ' + df_team1['Round_Hover'].astype(str),
-                    hoverinfo='text',
-                    marker=dict(size=10, color='#1f77b4'),
-                    name='Opposition, Round'
-                ))
-                _add_trendline_and_correlation(
-                    fig,
-                    x,
-                    y,
-                    stat1,
-                    stat2,
-                    f"{stat1} vs {stat2}: {team1}"
-                )
-                plotly_chart_custom(fig)
-        else:
-            st.write("Please add a 2nd stat")
 
 
 
