@@ -541,14 +541,14 @@ if page == "Player Comparison":
                 
             ))
             
-        fig2.update_layout(
-            title=dict(text=f"{stat2}: {player1}", font=dict(color='black')),
-            xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
-            yaxis=dict(title=dict(text=f"{stat2}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-            plot_bgcolor='#99AEDE',
-            paper_bgcolor='#99AEDE'
-        )
+            fig2.update_layout(
+                title=dict(text=f"{stat2}: {player1}", font=dict(color='black')),
+                xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
+                yaxis=dict(title=dict(text=f"{stat2}", font=dict(color='black')), tickfont=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+                plot_bgcolor='#99AEDE',
+                paper_bgcolor='#99AEDE'
+            )
             
             plotly_chart_custom(fig2)
                         
