@@ -54,6 +54,20 @@ def get_player_stats():
     df["Year"] = df["match_date"].dt.year.astype(str)
     df["Round"] = df["round"]
 
+    matches_rows = _fetch_all_rows("matches")
+    if matches_rows:
+        matches_df = pd.DataFrame(matches_rows)
+        matches_df["match_date"] = pd.to_datetime(matches_df["match_date"])
+        opponent_lookup = matches_df[["match_date", "team", "opponent_team"]].drop_duplicates()
+        df = df.merge(
+            opponent_lookup,
+            left_on=["match_date", "team"],
+            right_on=["match_date", "team"],
+            how="left",
+        )
+        df["Opposition"] = df["opponent_team"]
+        df["Team_Name"] = df["team"]
+
     match_df = get_match_data(sorted(df["Year"].unique().tolist()))
     if not match_df.empty:
         match_df["Date"] = pd.to_datetime(match_df["Date"])
@@ -140,7 +154,7 @@ def get_player_stats():
     }
 
     df = df.rename(columns=rename_map)
-    df = df.drop(columns=["Date"], errors="ignore")
+    df = df.drop(columns=["Date", "opponent_team"], errors="ignore")
     df = df.drop_duplicates(subset=["Name", "Round", "Year"], keep="first").reset_index(drop=True)
 
     df["Home Team"] = df["Home Team"].astype("string").str.replace("-", " ", regex=False)

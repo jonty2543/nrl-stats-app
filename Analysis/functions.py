@@ -420,11 +420,8 @@ def player_data_cleaner(df, match_data, matches_full):
 
     df = df.drop_duplicates(subset=['Name', 'Round', 'Year'])
 
-    n = 18
-    rows = len(df)
-    pattern = np.tile(np.concatenate([['Home Team'] * n, ['Away Team'] * n]), rows // (2 * n) + 1)[:rows]
-
-    df['Team_Name'] = df.lookup(df.index, pattern)
+    if 'Team_Name' not in df.columns and 'Team' in df.columns:
+        df['Team_Name'] = df['Team']
 
     df = df.drop(columns=['Home'])
 
@@ -506,15 +503,14 @@ def player_data_cleaner_simple(df, match_data):
 
     df = df.drop_duplicates(subset=['Name', 'Round', 'Year'])
 
-    n = 18
-    rows = len(df)
-    pattern = np.tile(np.concatenate([['Home Team'] * n, ['Away Team'] * n]), rows // (2 * n) + 1)[:rows]
-
-    df['Team_Name'] = df.apply(lambda row: row[pattern[row.name]], axis=1)
-
-    df['Opposition'] = df['Away Team']
-    df.loc[df['Team_Name'] == df['Home Team'], 'Opposition'] = df['Away Team']
-    df.loc[df['Team_Name'] != df['Home Team'], 'Opposition'] = df['Home Team']
+    if 'Team_Name' not in df.columns and 'Team' in df.columns:
+        df['Team_Name'] = df['Team']
+    if 'Opposition' not in df.columns and {'Home Team', 'Away Team', 'Team_Name'}.issubset(df.columns):
+        df['Opposition'] = np.where(
+            df['Team_Name'] == df['Home Team'],
+            df['Away Team'],
+            df['Home Team']
+        )
 
     df = df.replace('-', '0')
     df['Tackle Efficiency'] = _strip_suffix(df['Tackle Efficiency'], '%')
