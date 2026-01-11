@@ -136,7 +136,6 @@ def get_player_stats():
     rename_map = {
         "player": "Name",
         "team": "Team",
-        "opponent_team": "Opponent",
         "number": "Number",
         "position": "Position",
         "mins_played": "Mins Played",

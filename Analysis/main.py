@@ -103,6 +103,10 @@ st.markdown(
         border: 1px solid var(--border);
         border-radius: 10px;
     }
+    .stPlotlyChart > div {
+        border-radius: 10px;
+        overflow: hidden;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -131,10 +135,33 @@ if "Opponent" in df_all.columns and isinstance(df_all["Opponent"], pd.DataFrame)
     df_all["Opponent"] = df_all["Opponent"].iloc[:, 0]
 
 available_years = sorted(df_all['Year'].dropna().unique().tolist(), reverse=True)
+position_options = sorted(df_all.get("Position", pd.Series(dtype=str)).dropna().unique().tolist())
+
 with st.container():
-    year_choice = st.selectbox("Year", available_years, index=0)
+    filter_cols = st.columns([1.1, 1, 1, 1], gap="medium")
+    with filter_cols[0]:
+        year_choice = st.selectbox("Year", available_years, index=0)
+    with filter_cols[1]:
+        position_choice = st.selectbox("Position", ["All"] + position_options)
+    with filter_cols[2]:
+        minutes_threshold = st.number_input(
+            "Minutes Threshold",
+            min_value=0.0,
+            max_value=80.0,
+            value=0.0,
+            step=5.0,
+        )
+    with filter_cols[3]:
+        minutes_mode = st.selectbox("Minutes Filter", ["All", "Over", "Under"])
 
 df = df_all[df_all['Year'] == year_choice].copy()
+if "Position" in df.columns and position_choice != "All":
+    df = df[df["Position"] == position_choice]
+if "Mins Played" in df.columns and minutes_mode != "All":
+    if minutes_mode == "Over":
+        df = df[df["Mins Played"] >= minutes_threshold]
+    else:
+        df = df[df["Mins Played"] <= minutes_threshold]
 
 if df.empty:
     st.warning("No data available for the selected year.")
