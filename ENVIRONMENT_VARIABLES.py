@@ -1,6 +1,9 @@
 TEAMS = ["Broncos", "Roosters", "Wests Tigers", "Rabbitohs", "Storm", "Eels", "Raiders", "Knights", "Dragons", "Sea Eagles", "Panthers", "Sharks", "Bulldogs", "Dolphins", "Titans", "Cowboys", "Warriors"]
 NRL_WEBSITE = "https://www.nrl.com/draw/nrl-premiership/"
 
+SUPABASE_URL = "https://glrzwxpxkckxaogpkwmn.supabase.co"
+SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdscnp3eHB4a2NreGFvZ3Brd21uIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1NjA3OTU3NiwiZXhwIjoyMDcxNjU1NTc2fQ.YOF9ryJbhBoKKHT0n4eZDMGrR9dczR8INHVs_By4vRU"
+
 PLAYER_LABELS =     ["Number", "Position", "Mins Played", "Points", "Tries", "Conversions", "Conversion Attempts",
                     "Penalty Goals", "Goal Conversion Rate", "1 Point Field Goals",
                     "2 Point Field Goals", "Total Points", "All Runs", "All Run Metres",

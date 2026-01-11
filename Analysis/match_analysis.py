@@ -5,8 +5,6 @@ import pandas as pd
 import Analysis.json_to_csv as j
 from collections import defaultdict
 import ENVIRONMENT_VARIABLES as EV
-from Analysis.functions import match_detailed_functions as md
-from Analysis.functions import player_functions as pf
 
 from bokeh.plotting import figure, show
 from bokeh.io import output_notebook
@@ -15,6 +13,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 import statsmodels.api as sm
+import Analysis.functions as fn
 
 
 #Get data
@@ -23,22 +22,22 @@ df = j.get_player_stats()
 
 match_detailed = j.get_detailed_match(years)
 match_df = j.get_match_data(years)
-odds = md.get_odds()
+odds = fn.get_odds()
 
-matches_full = md.clean_match_detailed(match_detailed, match_df)
-matches_full = md.combine_odds(matches_full, odds)
-matches_full = md.per_min_features(matches_full)
-matches_full = md.opposition_stats(matches_full)
+matches_full = fn.clean_match_detailed(match_detailed, match_df)
+matches_full = fn.combine_odds(matches_full, odds)
+matches_full = fn.per_min_features(matches_full)
+matches_full = fn.opposition_stats(matches_full)
 matches_full = matches_full.dropna(subset=['Referee'])
 
-df = pf.player_data_cleaner(df, match_df, matches_full)
+df = fn.player_data_cleaner(df, match_df, matches_full)
 df = df.drop_duplicates()
-players_dict, averages, team, team_avgs, position_dfs = pf.create_player_dicts(df)
+players_dict, averages, team, team_avgs, position_dfs = fn.create_player_dicts(df)
 position_corr = {position: df.corr() for position, df in position_dfs.items()}
 
-match_stats = md.create_model_features(matches_full, df)
+match_stats = fn.create_model_features(matches_full, df)
 
-df_test = md.opposition_stats(matches_full)
+df_test = fn.opposition_stats(matches_full)
 
 
 

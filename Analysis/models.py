@@ -13,8 +13,7 @@ import pandas as pd
 import Analysis.json_to_csv as j
 from collections import defaultdict
 import ENVIRONMENT_VARIABLES as EV
-from Analysis.functions import match_detailed_functions as md
-from Analysis.functions import player_functions as pf
+import Analysis.functions as fn
 
 #Get data
 years = [2022, 2023, 2024, 2025]
@@ -24,17 +23,17 @@ df = j.get_player_stats()
 
 
 #Clean data
-matches_full = md.clean_match_detailed(match_detailed, match_df)
-odds = md.get_odds()
-matches_full = md.combine_odds(matches_full, odds)
-matches_full = md.per_min_features(matches_full)
-matches_full = md.opposition_stats(matches_full)
+matches_full = fn.clean_match_detailed(match_detailed, match_df)
+odds = fn.get_odds()
+matches_full = fn.combine_odds(matches_full, odds)
+matches_full = fn.per_min_features(matches_full)
+matches_full = fn.opposition_stats(matches_full)
 matches_full = matches_full.dropna(subset=['Referee'])
-df = pf.player_data_cleaner(df, match_df, matches_full)
+df = fn.player_data_cleaner(df, match_df, matches_full)
 
 #Create model features
-match_stats = md.create_model_features(matches_full, df)
-players_dict, averages, team, team_avgs, position_dfs = pf.create_player_dicts(df)
+match_stats = fn.create_model_features(matches_full, df)
+players_dict, averages, team, team_avgs, position_dfs = fn.create_player_dicts(df)
 
 
 # ----------------------#

@@ -5,8 +5,6 @@ import pandas as pd
 import Analysis.json_to_csv as j
 from collections import defaultdict
 import ENVIRONMENT_VARIABLES as EV
-from Analysis.functions import match_detailed_functions as md
-from Analysis.functions import player_functions as pf
 import statsmodels.api as sm
 
 
@@ -15,16 +13,16 @@ df = j.get_player_stats()
 years = [2022, 2023, 2024, 2025]
 match_detailed = j.get_detailed_match(years)
 match_df = j.get_match_data(years)
-odds = md.get_odds()
+odds = fn.get_odds()
 
 #Clean data
-matches_full = md.clean_match_detailed(match_detailed, match_df)
-matches_full = md.combine_odds(matches_full, odds)
-matches_full = md.per_min_features(matches_full)
+matches_full = fn.clean_match_detailed(match_detailed, match_df)
+matches_full = fn.combine_odds(matches_full, odds)
+matches_full = fn.per_min_features(matches_full)
 matches_full = matches_full.dropna(subset=['Referee'])
-df = pf.player_data_cleaner(df, match_df, matches_full)
+df = fn.player_data_cleaner(df, match_df, matches_full)
 
-players_dict, averages, team, team_avgs, position_dfs = pf.create_player_dicts(df)
+players_dict, averages, team, team_avgs, position_dfs = fn.create_player_dicts(df)
 
 position_corr = {position: df.corr() for position, df in position_dfs.items()}
 
@@ -114,6 +112,7 @@ for i in stats:
 
 import matplotlib.pyplot as plt
 import numpy as np
+import Analysis.functions as fn
 
 # Extract the data
 y = position_dfs['full']['Dummy Passes']
