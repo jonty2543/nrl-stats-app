@@ -174,6 +174,87 @@ def plotly_chart_custom(fig):
     )
 
 
+def _set_corr_layout(fig, stat1, stat2, title, corr_text=None, corr_color=None):
+    annotations = []
+    if corr_text and corr_color:
+        annotations = [
+            dict(
+                text=corr_text,
+                xref='paper',
+                yref='paper',
+                x=0,
+                y=1.05,
+                showarrow=False,
+                font=dict(size=12, color=corr_color),
+                align='left',
+                bgcolor="#f0f0f0",
+                bordercolor=corr_color,
+                borderwidth=1
+            )
+        ]
+    fig.update_layout(
+        title=dict(text=title, font=dict(color='black')),
+        annotations=annotations,
+        xaxis=dict(
+            title=dict(text=stat1, font=dict(color='black')),
+            tickfont=dict(color='black')
+        ),
+        yaxis=dict(
+            title=dict(text=stat2, font=dict(color='black')),
+            tickfont=dict(color='black')
+        ),
+        legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+        plot_bgcolor='#99AEDE',
+        paper_bgcolor='#99AEDE',
+        font=dict(color='black'),
+        hovermode='closest'
+    )
+
+
+def _add_trendline_and_correlation(fig, x, y, stat1, stat2, title):
+    data = pd.DataFrame({"x": x, "y": y}).dropna()
+    x = data["x"]
+    y = data["y"]
+
+    if len(x) < 2 or len(y) < 2:
+        st.info("Correlation unavailable: need at least two data points.")
+        _set_corr_layout(fig, stat1, stat2, title)
+        return
+    if (x == 0).all() or (y == 0).all():
+        st.info("Correlation unavailable: one of the stats is all 0.")
+        _set_corr_layout(fig, stat1, stat2, title)
+        return
+    if x.nunique() < 2 or y.nunique() < 2:
+        st.info("Correlation unavailable: one of the stats has no variation.")
+        _set_corr_layout(fig, stat1, stat2, title)
+        return
+
+    m, b = np.polyfit(x, y, 1)
+    fig.add_trace(go.Scatter(
+        x=x,
+        y=m * x + b,
+        mode='lines',
+        line=dict(dash='dash', color='black'),
+        name='Trendline'
+    ))
+
+    corr_coef, p_value = pearsonr(x, y)
+    abs_corr = abs(corr_coef)
+
+    if abs_corr < 0.3:
+        correlation = "Weak"
+        color = "red"
+    elif abs_corr < 0.7:
+        correlation = "Medium"
+        color = "orange"
+    else:
+        correlation = "Strong"
+        color = "green"
+
+    corr_text = f"<b>Correlation:</b> <span style='color:{color}'>{correlation}</span> (r = {corr_coef:.2f})"
+    _set_corr_layout(fig, stat1, stat2, title, corr_text=corr_text, corr_color=color)
+
+
 team_list = sorted(df['Team_Name'].dropna().unique().tolist())
 player_list = sorted(df['Name'].dropna().unique().tolist())
 player_stat_list = [stat for stat in EV.PLAYER_STATS if stat in df.columns]
@@ -509,64 +590,14 @@ if page == "Player Comparison":
                 name=player1
             ))
             
-            # Trendline
-            if not x1.empty and not y1.empty:
-                m1, b1 = np.polyfit(x1, y1, 1)
-                fig1.add_trace(go.Scatter(
-                    x=x1,
-                    y=m1 * x1 + b1,
-                    mode='lines',
-                    line=dict(dash='dash', color='black'),
-                    name='Trendline'
-                ))
-                
-                # Calculate correlation
-                corr_coef, p_value = pearsonr(x1, y1)
-                abs_corr = abs(corr_coef)
-            
-                # Determine trendline strength
-                if abs_corr < 0.3:
-                    correlation = "Weak"
-                    color = "red"
-                elif abs_corr < 0.7:
-                    correlation = "Medium"
-                    color = "orange"
-                else:
-                    correlation = "Strong"
-                    color = "green"
-            
-                fig1.update_layout(
-                    title=dict(text=f"{stat1} vs {stat2}: {player1}", font=dict(color='black')),
-                    annotations=[
-                        dict(
-                            text=f"<b>Correlation:</b> <span style='color:{color}'>{correlation}</span> (r = {corr_coef:.2f})",
-                            xref='paper',
-                            yref='paper',
-                            x=0,
-                            y=1.05,
-                            showarrow=False,
-                            font=dict(size=12, color=color),
-                            align='left',
-                            bgcolor="#f0f0f0",
-                            bordercolor=color,
-                            borderwidth=1
-                        )
-                    ],
-                    xaxis=dict(
-                        title=dict(text=stat1, font=dict(color='black')),
-                        tickfont=dict(color='black')
-                    ),
-                    yaxis=dict(
-                        title=dict(text=stat2, font=dict(color='black')),
-                        tickfont=dict(color='black')
-                    ),
-                    legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-                    plot_bgcolor='#99AEDE',
-                    paper_bgcolor='#99AEDE',
-                    font=dict(color='black'),  # Optional fallback
-                    hovermode='closest'
-                )
-            
+            _add_trendline_and_correlation(
+                fig1,
+                x1,
+                y1,
+                stat1,
+                stat2,
+                f"{stat1} vs {stat2}: {player1}"
+            )
             plotly_chart_custom(fig1)
                 
             # --- Plot 2: Team 2 ---
@@ -587,64 +618,14 @@ if page == "Player Comparison":
                 name=player2
             ))
             
-            # Trendline
-            if not x2.empty and not y2.empty:
-                m2, b2 = np.polyfit(x2, y2, 1)
-                fig2.add_trace(go.Scatter(
-                    x=x2,
-                    y=m2 * x2 + b2,
-                    mode='lines',
-                    line=dict(dash='dash', color='black'),
-                    name='Trendline'
-                ))
-                
-                # Calculate correlation
-                corr_coef, p_value = pearsonr(x2, y2)
-                abs_corr = abs(corr_coef)
-            
-                # Determine trendline strength
-                if abs_corr < 0.3:
-                    correlation = "Weak"
-                    color = "red"
-                elif abs_corr < 0.7:
-                    correlation = "Medium"
-                    color = "orange"
-                else:
-                    correlation = "Strong"
-                    color = "green"
-            
-                fig2.update_layout(
-                    title=dict(text=f"{stat1} vs {stat2}: {player2}", font=dict(color='black')),
-                    annotations=[
-                        dict(
-                            text=f"<b>Correlation:</b> <span style='color:{color}'>{correlation}</span> (r = {corr_coef:.2f})",
-                            xref='paper',
-                            yref='paper',
-                            x=0,
-                            y=1.05,
-                            showarrow=False,
-                            font=dict(size=12, color=color),
-                            align='left',
-                            bgcolor="#f0f0f0",
-                            bordercolor=color,
-                            borderwidth=1
-                        )
-                    ],
-                    xaxis=dict(
-                        title=dict(text=stat1, font=dict(color='black')),
-                        tickfont=dict(color='black')
-                    ),
-                    yaxis=dict(
-                        title=dict(text=stat2, font=dict(color='black')),
-                        tickfont=dict(color='black')
-                    ),
-                    legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-                    plot_bgcolor='#99AEDE',
-                    paper_bgcolor='#99AEDE',
-                    font=dict(color='black'),  # Optional fallback
-                    hovermode='closest'
-                )
-            
+            _add_trendline_and_correlation(
+                fig2,
+                x2,
+                y2,
+                stat1,
+                stat2,
+                f"{stat1} vs {stat2}: {player2}"
+            )
             plotly_chart_custom(fig2)
             
 
@@ -657,25 +638,6 @@ if page == "Player Comparison":
                 x = df_player1[stat1]
                 y = df_player1[stat2]
                 
-                # Fit linear trendline
-                m, b = np.polyfit(x, y, 1)
-                trend_y = m * x + b
-
-                # Calculate correlation
-                corr_coef, p_value = pearsonr(x, y)
-                abs_corr = abs(corr_coef)
-            
-                # Determine trendline strength
-                if abs_corr < 0.3:
-                    correlation = "Weak"
-                    color = "red"
-                elif abs_corr < 0.7:
-                    correlation = "Medium"
-                    color = "orange"
-                else:
-                    correlation = "Strong"
-                    color = "green"
-                    
                 fig = go.Figure()
             
                 fig.add_trace(go.Scatter(
@@ -688,46 +650,14 @@ if page == "Player Comparison":
                     name='Opposition, Round'
                 ))
             
-                # Trendline
-                fig.add_trace(go.Scatter(
-                    x=x, y=trend_y,
-                    mode='lines',
-                    line=dict(dash='dash', color='black'),
-                    name='Trendline'
-                ))
-            
-                fig.update_layout(
-                    title=dict(text=f"{stat1} vs {stat2}: {player1}", font=dict(color='black')),
-                    annotations=[
-                        dict(
-                            text=f"<b>Correlation:</b> <span style='color:{color}'>{correlation}</span> (r = {corr_coef:.2f})",
-                            xref='paper',
-                            yref='paper',
-                            x=0,
-                            y=1.05,
-                            showarrow=False,
-                            font=dict(size=12, color=color),
-                            align='left',
-                            bgcolor="#f0f0f0",
-                            bordercolor=color,
-                            borderwidth=1
-                        )
-                    ],
-                    xaxis=dict(
-                        title=dict(text=stat1, font=dict(color='black')),
-                        tickfont=dict(color='black')
-                    ),
-                    yaxis=dict(
-                        title=dict(text=stat2, font=dict(color='black')),
-                        tickfont=dict(color='black')
-                    ),
-                    legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-                    plot_bgcolor='#99AEDE',
-                    paper_bgcolor='#99AEDE',
-                    font=dict(color='black'),  # Optional fallback
-                    hovermode='closest'
+                _add_trendline_and_correlation(
+                    fig,
+                    x,
+                    y,
+                    stat1,
+                    stat2,
+                    f"{stat1} vs {stat2}: {player1}"
                 )
-                
                 plotly_chart_custom(fig)
 
 
@@ -744,63 +674,66 @@ elif page == "Teams Comparison":
         st.error("No team stats available for the selected year.")
         st.stop()
 
-    team1 = st.selectbox("Select Team 1", team_list)
-    team2 = st.selectbox("Select Team 2 (Optional)", ["None"] + team_list)
-    stat1 = st.selectbox("Select Stat 1", team_stat_list)
-    stat2 = st.selectbox("Select Stat 2 (Optional)", ["None"] + team_stat_list)
-    
-    team_df = df.set_index(['Team_Name', 'Round', 'Opposition']).groupby(['Team_Name', 'Round', 'Opposition'])[team_stat_list].sum().reset_index()
+    left_col, right_col = st.columns([1.3, 2], gap="large")
 
-    summary_data = []
-
-    # Player 1 Stat 1
-    if team1 and stat1:
-        df_p1_stat1 = team_df[team_df['Team_Name'] == team1][stat1]
-        summary_data.append({
-            "team": team1,
-            "Stat": stat1,
-            "Average": f"{df_p1_stat1.mean():.2f}",
-            "Min": f"{df_p1_stat1.min():.2f}",
-            "Max": f"{df_p1_stat1.max():.2f}"
-        })
-
-    # team 2 Stat 1
-    if team2 != "None" and stat1:
-        df_p2_stat1 = team_df[team_df['Team_Name'] == team2][stat1]
-        summary_data.append({
-            "team": team2,
-            "Stat": stat1,
-            "Average": f"{df_p2_stat1.mean():.2f}",
-            "Min": f"{df_p2_stat1.min():.2f}",
-            "Max": f"{df_p2_stat1.max():.2f}"
-        })
-
-    # team 1 Stat 2
-    if team1 and stat2 != "None":
-        df_p1_stat2 = team_df[team_df['Team_Name'] == team1][stat2]
-        summary_data.append({
-            "team": team1,
-            "Stat": stat2,
-            "Average": f"{df_p1_stat2.mean():.2f}",
-            "Min": f"{df_p1_stat2.min():.2f}",
-            "Max": f"{df_p1_stat2.max():.2f}"
-        })
+    with left_col:
+        team1 = st.selectbox("Select Team 1", team_list)
+        team2 = st.selectbox("Select Team 2 (Optional)", ["None"] + team_list)
+        stat1 = st.selectbox("Select Stat 1", team_stat_list)
+        stat2 = st.selectbox("Select Stat 2 (Optional)", ["None"] + team_stat_list)
         
-    # team 2 Stat 2
-    if team2 != "None" and stat2 != "None":
-        df_p2_stat2 = team_df[team_df['Team_Name'] == team2][stat2]
-        summary_data.append({
-            "team": team2,
-            "Stat": stat2,
-            "Average": f"{df_p2_stat2.mean():.2f}",
-            "Min": f"{df_p2_stat2.min():.2f}",
-            "Max": f"{df_p2_stat2.max():.2f}"
-        })
+        team_df = df.set_index(['Team_Name', 'Round', 'Opposition']).groupby(['Team_Name', 'Round', 'Opposition'])[team_stat_list].sum().reset_index()
 
-    # Display the summary table
-    if summary_data:
-        st.markdown("### 📊 Stat Summary")
-        st.table(pd.DataFrame(summary_data))
+        summary_data = []
+
+        # Player 1 Stat 1
+        if team1 and stat1:
+            df_p1_stat1 = team_df[team_df['Team_Name'] == team1][stat1]
+            summary_data.append({
+                "team": team1,
+                "Stat": stat1,
+                "Average": f"{df_p1_stat1.mean():.2f}",
+                "Min": f"{df_p1_stat1.min():.2f}",
+                "Max": f"{df_p1_stat1.max():.2f}"
+            })
+
+        # team 2 Stat 1
+        if team2 != "None" and stat1:
+            df_p2_stat1 = team_df[team_df['Team_Name'] == team2][stat1]
+            summary_data.append({
+                "team": team2,
+                "Stat": stat1,
+                "Average": f"{df_p2_stat1.mean():.2f}",
+                "Min": f"{df_p2_stat1.min():.2f}",
+                "Max": f"{df_p2_stat1.max():.2f}"
+            })
+
+        # team 1 Stat 2
+        if team1 and stat2 != "None":
+            df_p1_stat2 = team_df[team_df['Team_Name'] == team1][stat2]
+            summary_data.append({
+                "team": team1,
+                "Stat": stat2,
+                "Average": f"{df_p1_stat2.mean():.2f}",
+                "Min": f"{df_p1_stat2.min():.2f}",
+                "Max": f"{df_p1_stat2.max():.2f}"
+            })
+            
+        # team 2 Stat 2
+        if team2 != "None" and stat2 != "None":
+            df_p2_stat2 = team_df[team_df['Team_Name'] == team2][stat2]
+            summary_data.append({
+                "team": team2,
+                "Stat": stat2,
+                "Average": f"{df_p2_stat2.mean():.2f}",
+                "Min": f"{df_p2_stat2.min():.2f}",
+                "Max": f"{df_p2_stat2.max():.2f}"
+            })
+
+        # Display the summary table
+        if summary_data:
+            st.markdown("### 📊 Stat Summary")
+            st.table(pd.DataFrame(summary_data))
 
     if team2 != "None" and stat2 != "None":
         plot_type = 4
@@ -811,486 +744,261 @@ elif page == "Teams Comparison":
     else:
         plot_type = 1
         
-    st.subheader("📈 Stat Comparison by Round:")
-    st.write("Hover for opposition")
+    with right_col:
+        st.subheader("📈 Stat Comparison by Round:")
+        st.write("Hover for opposition")
 
-
-    #if st.button("Create Round Plot/s"):
-    if plot_type == 4:
-
-        # Filter the DataFrame for each team's data
-        df_team1 = team_df[team_df['Team_Name'] == team1]
-        df_team2 = team_df[team_df['Team_Name'] == team2]
-        
-        # --- Plot 1: stat1 over Round ---
-        fig1 = go.Figure()
-        
-        # Team 1
-        fig1.add_trace(go.Scatter(
-            x=df_team1['Round'],
-            y=df_team1[stat1],
-            mode='lines+markers',
-            name=f"{team1}",
-            marker=dict(symbol='circle', size=8),
-            line=dict(color='#1f77b4'),
-            hovertext=df_team1['Opposition'],
-            hoverinfo='text'
+        if plot_type == 4:
+            df_team1 = team_df[team_df['Team_Name'] == team1]
+            df_team2 = team_df[team_df['Team_Name'] == team2]
             
-        ))
-        
-        # Team 2
-        fig1.add_trace(go.Scatter(
-            x=df_team2['Round'],
-            y=df_team2[stat1],
-            mode='lines+markers',
-            name=f"{team2}",
-            marker=dict(symbol='x', size=8),
-            line=dict(color='green'),
-            hovertext=df_team2['Opposition'],
-            hoverinfo='text'
-        ))
-        
-        fig1.update_layout(
-            title=dict(text=f"{stat1} Comparison: {team1} vs {team2}", font=dict(color='black')),
-            xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
-            yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-            plot_bgcolor='#99AEDE',
-            paper_bgcolor='#99AEDE'
-        )
-        
-        plotly_chart_custom(fig1)
-        
-        # --- Plot 2: stat2 over Round ---
-        fig2 = go.Figure()
-        
-        # Team 1
-        fig2.add_trace(go.Scatter(
-            x=df_team1['Round'],
-            y=df_team1[stat2],
-            mode='lines+markers',
-            name=f"{team1}",
-            marker=dict(symbol='circle', size=8),
-            line=dict(color='#1f77b4'),
-            hovertext=df_team1['Opposition'],
-            hoverinfo='text'
-        ))
-        
-        # Team 2
-        fig2.add_trace(go.Scatter(
-            x=df_team2['Round'],
-            y=df_team2[stat2],
-            mode='lines+markers',
-            name=f"{team2}",
-            marker=dict(symbol='x', size=8),
-            line=dict(color='green'),
-            hovertext=df_team2['Opposition'],
-            hoverinfo='text'
-        ))
-        
-        fig2.update_layout(
-            title=dict(text=f"{stat2} Comparison: {team1} vs {team2}", font=dict(color='black')),
-            xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
-            yaxis=dict(title=dict(text=f"{stat2}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-            plot_bgcolor='#99AEDE',
-            paper_bgcolor='#99AEDE'
-        )
-        
-        plotly_chart_custom(fig2)
-
-
-    elif plot_type == 2:
-     
-        # Filter the DataFrame for each team's data
-        df_team1 = team_df[team_df['Team_Name'] == team1]
-        df_team2 = team_df[team_df['Team_Name'] == team2]
-        
-        # Create the figure for comparing stat1
-        fig = go.Figure()
-        
-        # Team 1 for stat1
-        fig.add_trace(go.Scatter(
-            x=df_team1['Round'],
-            y=df_team1[stat1],
-            mode='lines+markers',
-            name=f"{team1}",
-            marker=dict(symbol='circle', size=8),
-            line=dict(color='#1f77b4'),
-            hovertext=df_team1['Opposition'],
-            hoverinfo='text'
-        ))
-        
-        # Team 2 for stat1
-        fig.add_trace(go.Scatter(
-            x=df_team2['Round'],
-            y=df_team2[stat1],
-            mode='lines+markers',
-            name=f"{team2}",
-            marker=dict(symbol='x', size=8),
-            line=dict(color='green'),
-            hovertext=df_team2['Opposition'],
-            hoverinfo='text'
-        ))
-        
-        # Update the layout for the figure
-        fig.update_layout(
-            title=dict(text=f"{stat1} Comparison: {team1} vs {team2}", font=dict(color='black')),
-            xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
-            yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-            plot_bgcolor='#99AEDE',
-            paper_bgcolor='#99AEDE'
-        )
-        
-        # Display the figure
-        plotly_chart_custom(fig) 
-
-    elif plot_type == 3:
-        
-        # Filter the DataFrame for each team's data
-        df_team1 = team_df[team_df['Team_Name'] == team1]
-
-        
-        # --- Plot 1: stat1 over Round ---
-        fig1 = go.Figure()
-        
-        # Team 1
-        fig1.add_trace(go.Scatter(
-            x=df_team1['Round'],
-            y=df_team1[stat1],
-            mode='lines+markers',
-            name=f"{team1}",
-            marker=dict(symbol='circle', size=8),
-            line=dict(color='#1f77b4'),
-            hovertext=df_team1['Opposition'],
-            hoverinfo='text'
+            fig1 = go.Figure()
+            fig1.add_trace(go.Scatter(
+                x=df_team1['Round'],
+                y=df_team1[stat1],
+                mode='lines+markers',
+                name=f"{team1}",
+                marker=dict(symbol='circle', size=8),
+                line=dict(color='#1f77b4'),
+                hovertext=df_team1['Opposition'],
+                hoverinfo='text'
+            ))
+            fig1.add_trace(go.Scatter(
+                x=df_team2['Round'],
+                y=df_team2[stat1],
+                mode='lines+markers',
+                name=f"{team2}",
+                marker=dict(symbol='x', size=8),
+                line=dict(color='green'),
+                hovertext=df_team2['Opposition'],
+                hoverinfo='text'
+            ))
+            fig1.update_layout(
+                title=dict(text=f"{stat1} Comparison: {team1} vs {team2}", font=dict(color='black')),
+                xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
+                yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+                plot_bgcolor='#99AEDE',
+                paper_bgcolor='#99AEDE'
+            )
+            plotly_chart_custom(fig1)
             
-        ))
-        
-        fig1.update_layout(
-            title=dict(text=f"{stat1}: {team1}", font=dict(color='black')),
-            xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
-            yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-            plot_bgcolor='#99AEDE',
-            paper_bgcolor='#99AEDE'
-        )
-        
-        plotly_chart_custom(fig1)
-        
-        # --- Plot 2: stat2 ---
-        fig2 = go.Figure()
-        
-        # Team 1
-        fig2.add_trace(go.Scatter(
-            x=df_team1['Round'],
-            y=df_team1[stat2],
-            mode='lines+markers',
-            name=f"{team1}",
-            marker=dict(symbol='circle', size=8),
-            line=dict(color='#1f77b4'),
-            hovertext=df_team1['Opposition'],
-            hoverinfo='text'
+            fig2 = go.Figure()
+            fig2.add_trace(go.Scatter(
+                x=df_team1['Round'],
+                y=df_team1[stat2],
+                mode='lines+markers',
+                name=f"{team1}",
+                marker=dict(symbol='circle', size=8),
+                line=dict(color='#1f77b4'),
+                hovertext=df_team1['Opposition'],
+                hoverinfo='text'
+            ))
+            fig2.add_trace(go.Scatter(
+                x=df_team2['Round'],
+                y=df_team2[stat2],
+                mode='lines+markers',
+                name=f"{team2}",
+                marker=dict(symbol='x', size=8),
+                line=dict(color='green'),
+                hovertext=df_team2['Opposition'],
+                hoverinfo='text'
+            ))
+            fig2.update_layout(
+                title=dict(text=f"{stat2} Comparison: {team1} vs {team2}", font=dict(color='black')),
+                xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
+                yaxis=dict(title=dict(text=f"{stat2}", font=dict(color='black')), tickfont=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+                plot_bgcolor='#99AEDE',
+                paper_bgcolor='#99AEDE'
+            )
+            plotly_chart_custom(fig2)
+        elif plot_type == 2:
+            df_team1 = team_df[team_df['Team_Name'] == team1]
+            df_team2 = team_df[team_df['Team_Name'] == team2]
             
-        ))
-        
-        fig2.update_layout(
-            title=dict(text=f"{stat2}: {team1}", font=dict(color='black')),
-            xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
-            yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-            plot_bgcolor='#99AEDE',
-            paper_bgcolor='#99AEDE'
-        )
-        
-        plotly_chart_custom(fig2)
-                     
-    else:
-        
-        # Filter the DataFrame for each team's data
-        df_team1 = team_df[team_df['Team_Name'] == team1]
-        
-        # --- Plot 1: stat1 over Round ---
-        fig1 = go.Figure()
-        
-        # Team 1
-        fig1.add_trace(go.Scatter(
-            x=df_team1['Round'],
-            y=df_team1[stat1],
-            mode='lines+markers',
-            name=f"{team1}",
-            marker=dict(symbol='circle', size=8),
-            line=dict(color='#1f77b4'),
-            hovertext=df_team1['Opposition'],
-            hoverinfo='text'
+            fig = go.Figure()
+            fig.add_trace(go.Scatter(
+                x=df_team1['Round'],
+                y=df_team1[stat1],
+                mode='lines+markers',
+                name=f"{team1}",
+                marker=dict(symbol='circle', size=8),
+                line=dict(color='#1f77b4'),
+                hovertext=df_team1['Opposition'],
+                hoverinfo='text'
+            ))
+            fig.add_trace(go.Scatter(
+                x=df_team2['Round'],
+                y=df_team2[stat1],
+                mode='lines+markers',
+                name=f"{team2}",
+                marker=dict(symbol='x', size=8),
+                line=dict(color='green'),
+                hovertext=df_team2['Opposition'],
+                hoverinfo='text'
+            ))
+            fig.update_layout(
+                title=dict(text=f"{stat1} Comparison: {team1} vs {team2}", font=dict(color='black')),
+                xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
+                yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+                plot_bgcolor='#99AEDE',
+                paper_bgcolor='#99AEDE'
+            )
+            plotly_chart_custom(fig)
+        elif plot_type == 3:
+            df_team1 = team_df[team_df['Team_Name'] == team1]
             
-        ))
-        
-        fig1.update_layout(
-            title=dict(text=f"{stat1}: {team1}", font=dict(color='black')),
-            xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
-            yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
-            legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-            plot_bgcolor='#99AEDE',
-            paper_bgcolor='#99AEDE'
-        )
-        
-        plotly_chart_custom(fig1)
+            fig1 = go.Figure()
+            fig1.add_trace(go.Scatter(
+                x=df_team1['Round'],
+                y=df_team1[stat1],
+                mode='lines+markers',
+                name=f"{team1}",
+                marker=dict(symbol='circle', size=8),
+                line=dict(color='#1f77b4'),
+                hovertext=df_team1['Opposition'],
+                hoverinfo='text'
+            ))
+            fig1.update_layout(
+                title=dict(text=f"{stat1}: {team1}", font=dict(color='black')),
+                xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
+                yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+                plot_bgcolor='#99AEDE',
+                paper_bgcolor='#99AEDE'
+            )
+            plotly_chart_custom(fig1)
+            
+            fig2 = go.Figure()
+            fig2.add_trace(go.Scatter(
+                x=df_team1['Round'],
+                y=df_team1[stat2],
+                mode='lines+markers',
+                name=f"{team1}",
+                marker=dict(symbol='circle', size=8),
+                line=dict(color='#1f77b4'),
+                hovertext=df_team1['Opposition'],
+                hoverinfo='text'
+            ))
+            fig2.update_layout(
+                title=dict(text=f"{stat2}: {team1}", font=dict(color='black')),
+                xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
+                yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+                plot_bgcolor='#99AEDE',
+                paper_bgcolor='#99AEDE'
+            )
+            plotly_chart_custom(fig2)
+        else:
+            df_team1 = team_df[team_df['Team_Name'] == team1]
+            
+            fig1 = go.Figure()
+            fig1.add_trace(go.Scatter(
+                x=df_team1['Round'],
+                y=df_team1[stat1],
+                mode='lines+markers',
+                name=f"{team1}",
+                marker=dict(symbol='circle', size=8),
+                line=dict(color='#1f77b4'),
+                hovertext=df_team1['Opposition'],
+                hoverinfo='text'
+            ))
+            fig1.update_layout(
+                title=dict(text=f"{stat1}: {team1}", font=dict(color='black')),
+                xaxis=dict(title=dict(text="Round", font=dict(color='black')), tickfont=dict(color='black')),
+                yaxis=dict(title=dict(text=f"{stat1}", font=dict(color='black')), tickfont=dict(color='black')),
+                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
+                plot_bgcolor='#99AEDE',
+                paper_bgcolor='#99AEDE'
+            )
+            plotly_chart_custom(fig1)
 
+        st.subheader(f"📈 {stat1} vs {stat2}:")
+        st.write("Hover for opposition")
 
-    st.subheader(f"📈 {stat1} vs {stat2}:")
-    st.write("Hover for opposition")
-
-
-    #if st.button("Create Stat Plot/s"):
-    if plot_type == 4:
-        # Filter the DataFrame for each team's data
-        df_team1 = team_df[team_df['Team_Name'] == team1]
-        df_team2 = team_df[team_df['Team_Name'] == team2]
-        
-        # --- Plot 1: Team 1 ---
-        x1 = df_team1[stat1]
-        y1 = df_team1[stat2]
-        hovertext1 = df_team1['Opposition'] + ', Rd ' + df_team1['Round'].astype(str)
-        
-        fig1 = go.Figure()
-        
-        # Scatter points
-        fig1.add_trace(go.Scatter(
-            x=x1,
-            y=y1,
-            mode='markers',
-            hovertext=hovertext1,
-            hoverinfo='text',
-            marker=dict(size=10, color='#1f77b4'),
-            name=team1
-        ))
-        
-        # Trendline
-        if not x1.empty and not y1.empty:
-            m1, b1 = np.polyfit(x1, y1, 1)
+        if plot_type == 4:
+            df_team1 = team_df[team_df['Team_Name'] == team1]
+            df_team2 = team_df[team_df['Team_Name'] == team2]
+            
+            x1 = df_team1[stat1]
+            y1 = df_team1[stat2]
+            hovertext1 = df_team1['Opposition'] + ', Rd ' + df_team1['Round'].astype(str)
+            
+            fig1 = go.Figure()
             fig1.add_trace(go.Scatter(
                 x=x1,
-                y=m1 * x1 + b1,
-                mode='lines',
-                line=dict(dash='dash', color='black'),
-                name='Trendline'
+                y=y1,
+                mode='markers',
+                hovertext=hovertext1,
+                hoverinfo='text',
+                marker=dict(size=10, color='#1f77b4'),
+                name=team1
             ))
             
-            # Calculate correlation
-            corr_coef, p_value = pearsonr(x1, y1)
-            abs_corr = abs(corr_coef)
-        
-            # Determine trendline strength
-            if abs_corr < 0.3:
-                correlation = "Weak"
-                color = "red"
-            elif abs_corr < 0.7:
-                correlation = "Medium"
-                color = "orange"
-            else:
-                correlation = "Strong"
-                color = "green"
-        
-        
-            fig1.update_layout(
-                title=dict(text=f"{stat1} vs {stat2}: {team1}", font=dict(color='black')),
-                annotations=[
-                    dict(
-                        text=f"<b>Correlation:</b> <span style='color:{color}'>{correlation}</span> (r = {corr_coef:.2f})",
-                        xref='paper',
-                        yref='paper',
-                        x=0,
-                        y=1.05,
-                        showarrow=False,
-                        font=dict(size=12, color=color),
-                        align='left',
-                        bgcolor="#f0f0f0",
-                        bordercolor=color,
-                        borderwidth=1
-                    )
-                ],
-                xaxis=dict(
-                    title=dict(text=stat1, font=dict(color='black')),
-                    tickfont=dict(color='black')
-                ),
-                yaxis=dict(
-                    title=dict(text=stat2, font=dict(color='black')),
-                    tickfont=dict(color='black')
-                ),
-                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-                plot_bgcolor='#99AEDE',
-                paper_bgcolor='#99AEDE',
-                font=dict(color='black'),  # Optional fallback
-                hovermode='closest'
+            _add_trendline_and_correlation(
+                fig1,
+                x1,
+                y1,
+                stat1,
+                stat2,
+                f"{stat1} vs {stat2}: {team1}"
             )
-        
-        plotly_chart_custom(fig1)
+            plotly_chart_custom(fig1)
+                
+            x2 = df_team2[stat1]
+            y2 = df_team2[stat2]
+            hovertext2 = df_team2['Opposition'] + ', Rd ' + df_team2['Round'].astype(str)
             
-        # --- Plot 2: Team 2 ---
-        x2 = df_team2[stat1]
-        y2 = df_team2[stat2]
-        hovertext2 = df_team2['Opposition'] + ', Rd ' + df_team2['Round'].astype(str)
-        
-        fig2 = go.Figure()
-        
-        # Scatter points
-        fig2.add_trace(go.Scatter(
-            x=x2,
-            y=y2,
-            mode='markers',
-            hovertext=hovertext2,
-            hoverinfo='text',
-            marker=dict(size=10, color='#ff7f0e'),
-            name=team2
-        ))
-        
-        # Trendline
-        if not x2.empty and not y2.empty:
-            m2, b2 = np.polyfit(x2, y2, 1)
+            fig2 = go.Figure()
             fig2.add_trace(go.Scatter(
                 x=x2,
-                y=m2 * x2 + b2,
-                mode='lines',
-                line=dict(dash='dash', color='black'),
-                name='Trendline'
+                y=y2,
+                mode='markers',
+                hovertext=hovertext2,
+                hoverinfo='text',
+                marker=dict(size=10, color='#ff7f0e'),
+                name=team2
             ))
             
-            # Calculate correlation
-            corr_coef, p_value = pearsonr(x2, y2)
-            abs_corr = abs(corr_coef)
-        
-            # Determine trendline strength
-            if abs_corr < 0.3:
-                correlation = "Weak"
-                color = "red"
-            elif abs_corr < 0.7:
-                correlation = "Medium"
-                color = "orange"
-            else:
-                correlation = "Strong"
-                color = "green"
-        
-            fig2.update_layout(
-                title=dict(text=f"{stat1} vs {stat2}: {team2}", font=dict(color='black')),
-                annotations=[
-                    dict(
-                        text=f"<b>Correlation:</b> <span style='color:{color}'>{correlation}</span> (r = {corr_coef:.2f})",
-                        xref='paper',
-                        yref='paper',
-                        x=0,
-                        y=1.05,
-                        showarrow=False,
-                        font=dict(size=12, color=color),
-                        align='left',
-                        bgcolor="#f0f0f0",
-                        bordercolor=color,
-                        borderwidth=1
-                    )
-                ],
-                xaxis=dict(
-                    title=dict(text=stat1, font=dict(color='black')),
-                    tickfont=dict(color='black')
-                ),
-                yaxis=dict(
-                    title=dict(text=stat2, font=dict(color='black')),
-                    tickfont=dict(color='black')
-                ),
-                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-                plot_bgcolor='#99AEDE',
-                paper_bgcolor='#99AEDE',
-                font=dict(color='black'),  # Optional fallback
-                hovermode='closest'
+            _add_trendline_and_correlation(
+                fig2,
+                x2,
+                y2,
+                stat1,
+                stat2,
+                f"{stat1} vs {stat2}: {team2}"
             )
-        
-        plotly_chart_custom(fig2)
-         
+            plotly_chart_custom(fig2)
+        elif plot_type == 3:
+            df_team1 = team_df[team_df['Team_Name'] == team1]
 
-    elif plot_type == 3:
-        
-        df_team1 = team_df[team_df['Team_Name'] == team1]
-
-
-        if not df_team1.empty:
-            x = df_team1[stat1]
-            y = df_team1[stat2]
-            
-            # Fit linear trendline
-            m, b = np.polyfit(x, y, 1)
-            trend_y = m * x + b
-
-            # Calculate correlation
-            corr_coef, p_value = pearsonr(x, y)
-            abs_corr = abs(corr_coef)
-        
-            # Determine trendline strength
-            if abs_corr < 0.3:
-                correlation = "Weak"
-                color = "red"
-            elif abs_corr < 0.7:
-                correlation = "Medium"
-                color = "orange"
-            else:
-                correlation = "Strong"
-                color = "green"
-        
-            fig = go.Figure()
-        
-            fig.add_trace(go.Scatter(
-                x=x,
-                y=y,
-                mode='markers',  # No 'text' here since we only want hover
-                hovertext=df_team1['Opposition'] + ', Rd ' + df_team1['Round'].astype(str),  # What shows on hover
-                hoverinfo='text',                  # Use only the text above
-                marker=dict(size=10, color='#1f77b4'),
-                name='Opposition, Round'
-            ))
-        
-            # Trendline
-            fig.add_trace(go.Scatter(
-                x=x, y=trend_y,
-                mode='lines',
-                line=dict(dash='dash', color='black'),
-                name='Trendline'
-            ))
-        
-            fig.update_layout(
-                title=dict(text=f"{stat1} vs {stat2}: {team1}", font=dict(color='black')),
-                annotations=[
-                    dict(
-                        text=f"<b>Correlation:</b> <span style='color:{color}'>{correlation}</span> (r = {corr_coef:.2f})",
-                        xref='paper',
-                        yref='paper',
-                        x=0,
-                        y=1.05,
-                        showarrow=False,
-                        font=dict(size=12, color=color),
-                        align='left',
-                        bgcolor="#f0f0f0",
-                        bordercolor=color,
-                        borderwidth=1
-                    )
-                ],
-                xaxis=dict(
-                    title=dict(text=stat1, font=dict(color='black')),
-                    tickfont=dict(color='black')
-                ),
-                yaxis=dict(
-                    title=dict(text=stat2, font=dict(color='black')),
-                    tickfont=dict(color='black')
-                ),
-                legend=dict(font=dict(color='black'), y=1.15, x=0.6),
-                plot_bgcolor='#99AEDE',
-                paper_bgcolor='#99AEDE',
-                font=dict(color='black'),  # Optional fallback
-                hovermode='closest'
-            )
-            
-            plotly_chart_custom(fig)
-
-
-    else: st.write("Please add a 2nd stat") 
+            if not df_team1.empty:
+                x = df_team1[stat1]
+                y = df_team1[stat2]
+                
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(
+                    x=x,
+                    y=y,
+                    mode='markers',
+                    hovertext=df_team1['Opposition'] + ', Rd ' + df_team1['Round'].astype(str),
+                    hoverinfo='text',
+                    marker=dict(size=10, color='#1f77b4'),
+                    name='Opposition, Round'
+                ))
+                _add_trendline_and_correlation(
+                    fig,
+                    x,
+                    y,
+                    stat1,
+                    stat2,
+                    f"{stat1} vs {stat2}: {team1}"
+                )
+                plotly_chart_custom(fig)
+        else:
+            st.write("Please add a 2nd stat")
 
 
 
