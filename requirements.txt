@@ -2,7 +2,7 @@ matplotlib
 numpy
 pandas
 openai
-streamlit
+streamlit>=1.31
 plotly
 scipy
 supabase
