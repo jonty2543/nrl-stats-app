@@ -134,6 +134,17 @@ df_all = df_all.loc[:, ~df_all.columns.duplicated()].copy()
 if "Opponent" in df_all.columns and isinstance(df_all["Opponent"], pd.DataFrame):
     df_all["Opponent"] = df_all["Opponent"].iloc[:, 0]
 
+def _ensure_selectbox_state(key, options, default=None):
+    if not options:
+        return None
+    if default is None:
+        default = options[0]
+    if key not in st.session_state:
+        st.session_state[key] = default
+    elif st.session_state[key] not in options:
+        st.session_state[key] = default
+    return st.session_state[key]
+
 available_years = sorted(df_all['Year'].dropna().unique().tolist(), reverse=True)
 position_options = sorted(df_all.get("Position", pd.Series(dtype=str)).dropna().unique().tolist())
 
@@ -154,9 +165,12 @@ with st.container():
     with filter_cols[3]:
         minutes_mode = st.selectbox("Minutes Filter", ["All", "Over", "Under"])
 
-df = df_all[df_all['Year'] == year_choice].copy()
-if "Position" in df.columns and position_choice != "All":
-    df = df[df["Position"] == position_choice]
+df_year = df_all[df_all['Year'] == year_choice].copy()
+df_position = df_year.copy()
+if "Position" in df_position.columns and position_choice != "All":
+    df_position = df_position[df_position["Position"] == position_choice]
+
+df = df_position.copy()
 if "Mins Played" in df.columns and minutes_mode != "All":
     if minutes_mode == "Over":
         df = df[df["Mins Played"] >= minutes_threshold]
@@ -327,10 +341,10 @@ def _prepare_round_plot_df(frame):
     return frame
 
 
-team_list = sorted(df['Team'].dropna().unique().tolist())
-player_list = sorted(df['Name'].dropna().unique().tolist())
-player_stat_list = [stat for stat in EV.PLAYER_STATS if stat in df.columns]
-team_stat_list = [stat for stat in EV.TEAM_STATS if stat in df.columns]
+team_list = sorted(df_position['Team'].dropna().unique().tolist())
+player_list = sorted(df_position['Name'].dropna().unique().tolist())
+player_stat_list = [stat for stat in EV.PLAYER_STATS if stat in df_position.columns]
+team_stat_list = [stat for stat in EV.TEAM_STATS if stat in df_position.columns]
 
 page = st.radio(
     "Views",
@@ -344,15 +358,25 @@ if page == "Player Comparison":
     left_col, right_col = st.columns([1.3, 2], gap="large")
 
     with left_col:
-        player1_query = st.text_input("Search Player 1")
+        player1_query = st.text_input("Search Player 1", key="player1_query")
         player1_options = [p for p in player_list if player1_query.lower() in p.lower()] if player1_query else player_list
-        player1 = st.selectbox("Select Player 1", player1_options)
+        player1_value = _ensure_selectbox_state("player1", player1_options)
+        player1_index = player1_options.index(player1_value) if player1_value in player1_options else 0
+        player1 = st.selectbox("Select Player 1", player1_options, index=player1_index, key="player1")
 
-        player2_query = st.text_input("Search Player 2 (Optional)")
+        player2_query = st.text_input("Search Player 2 (Optional)", key="player2_query")
         player2_options = [p for p in player_list if player2_query.lower() in p.lower()] if player2_query else player_list
-        player2 = st.selectbox("Select Player 2 (Optional)", ["None"] + player2_options)
-        stat1 = st.selectbox("Select Stat 1", player_stat_list)
-        stat2 = st.selectbox("Select Stat 2 (Optional)", ["None"] + player_stat_list)
+        player2_full_options = ["None"] + player2_options
+        player2_value = _ensure_selectbox_state("player2", player2_full_options, default="None")
+        player2_index = player2_full_options.index(player2_value) if player2_value in player2_full_options else 0
+        player2 = st.selectbox("Select Player 2 (Optional)", player2_full_options, index=player2_index, key="player2")
+        stat1_value = _ensure_selectbox_state("player_stat1", player_stat_list)
+        stat1_index = player_stat_list.index(stat1_value) if stat1_value in player_stat_list else 0
+        stat1 = st.selectbox("Select Stat 1", player_stat_list, index=stat1_index, key="player_stat1")
+        stat2_options = ["None"] + player_stat_list
+        stat2_value = _ensure_selectbox_state("player_stat2", stat2_options, default="None")
+        stat2_index = stat2_options.index(stat2_value) if stat2_value in stat2_options else 0
+        stat2 = st.selectbox("Select Stat 2 (Optional)", stat2_options, index=stat2_index, key="player_stat2")
 
         summary_data = []
 
@@ -714,10 +738,20 @@ elif page == "Teams Comparison":
     left_col, right_col = st.columns([1.3, 2], gap="large")
 
     with left_col:
-        team1 = st.selectbox("Select Team 1", team_list)
-        team2 = st.selectbox("Select Team 2 (Optional)", ["None"] + team_list)
-        stat1 = st.selectbox("Select Stat 1", team_stat_list)
-        stat2 = st.selectbox("Select Stat 2 (Optional)", ["None"] + team_stat_list)
+        team1_value = _ensure_selectbox_state("team1", team_list)
+        team1_index = team_list.index(team1_value) if team1_value in team_list else 0
+        team1 = st.selectbox("Select Team 1", team_list, index=team1_index, key="team1")
+        team2_options = ["None"] + team_list
+        team2_value = _ensure_selectbox_state("team2", team2_options, default="None")
+        team2_index = team2_options.index(team2_value) if team2_value in team2_options else 0
+        team2 = st.selectbox("Select Team 2 (Optional)", team2_options, index=team2_index, key="team2")
+        team_stat1_value = _ensure_selectbox_state("team_stat1", team_stat_list)
+        team_stat1_index = team_stat_list.index(team_stat1_value) if team_stat1_value in team_stat_list else 0
+        stat1 = st.selectbox("Select Stat 1", team_stat_list, index=team_stat1_index, key="team_stat1")
+        team_stat2_options = ["None"] + team_stat_list
+        team_stat2_value = _ensure_selectbox_state("team_stat2", team_stat2_options, default="None")
+        team_stat2_index = team_stat2_options.index(team_stat2_value) if team_stat2_value in team_stat2_options else 0
+        stat2 = st.selectbox("Select Stat 2 (Optional)", team_stat2_options, index=team_stat2_index, key="team_stat2")
         
         group_cols = ['Team', 'Round', 'Opponent']
         if 'Round_Label' in df.columns:
